@@ -1,0 +1,2171 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>דשבורד מו"מ | שכונת אלי כהן - תל מונד</title>
+<style>
+  :root {
+    --primary: #1a365d;
+    --primary-light: #2c5282;
+    --accent: #e53e3e;
+    --accent-green: #38a169;
+    --accent-orange: #dd6b20;
+    --accent-blue: #3182ce;
+    --bg: #f7fafc;
+    --card-bg: #ffffff;
+    --border: #e2e8f0;
+    --text: #2d3748;
+    --text-light: #718096;
+    --shadow: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    direction: rtl;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: #fff;
+    padding: 30px 40px;
+    box-shadow: var(--shadow-lg);
+  }
+  .header h1 { font-size: 1.8rem; margin-bottom: 4px; }
+  .header .subtitle { opacity: .85; font-size: .95rem; }
+  .header-meta {
+    display: flex;
+    gap: 30px;
+    margin-top: 12px;
+    font-size: .85rem;
+    opacity: .9;
+  }
+  .header-meta span { background: rgba(255,255,255,.15); padding: 3px 12px; border-radius: 20px; }
+
+  /* NAV */
+  .nav {
+    background: #fff;
+    border-bottom: 2px solid var(--border);
+    padding: 0 40px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav a {
+    padding: 14px 20px;
+    text-decoration: none;
+    color: var(--text-light);
+    font-size: .9rem;
+    font-weight: 600;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: all .2s;
+  }
+  .nav a:hover, .nav a.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+  }
+
+  /* LAYOUT */
+  .container { max-width: 1400px; margin: 0 auto; padding: 30px 40px; }
+
+  /* CARDS */
+  .card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 28px;
+    margin-bottom: 24px;
+    border: 1px solid var(--border);
+  }
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--bg);
+  }
+  .card-header .icon {
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+  .card-header h2 { font-size: 1.2rem; color: var(--primary); }
+  .card-header .badge {
+    margin-right: auto;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: .75rem;
+    font-weight: 700;
+  }
+
+  /* KPI GRID */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  .kpi {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; left: 0;
+    height: 4px;
+  }
+  .kpi.red::before { background: var(--accent); }
+  .kpi.green::before { background: var(--accent-green); }
+  .kpi.orange::before { background: var(--accent-orange); }
+  .kpi.blue::before { background: var(--accent-blue); }
+  .kpi .label { font-size: .8rem; color: var(--text-light); margin-bottom: 6px; }
+  .kpi .value { font-size: 1.8rem; font-weight: 800; }
+  .kpi .sub { font-size: .75rem; color: var(--text-light); margin-top: 4px; }
+  .kpi.red .value { color: var(--accent); }
+  .kpi.green .value { color: var(--accent-green); }
+  .kpi.orange .value { color: var(--accent-orange); }
+  .kpi.blue .value { color: var(--accent-blue); }
+
+  /* TABLES */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .9rem;
+  }
+  th {
+    background: var(--primary);
+    color: #fff;
+    padding: 12px 16px;
+    text-align: right;
+    font-weight: 600;
+  }
+  td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  tr:nth-child(even) { background: #f8fafc; }
+  tr:hover { background: #edf2f7; }
+
+  /* COMPARISON BAR */
+  .compare-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+  }
+  .compare-bar .bar-label { width: 120px; font-size: .85rem; font-weight: 600; }
+  .compare-bar .bar-track {
+    flex: 1;
+    height: 28px;
+    background: #edf2f7;
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+  }
+  .compare-bar .bar-fill {
+    height: 100%;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: .75rem;
+    font-weight: 700;
+    min-width: 40px;
+  }
+  .compare-bar .bar-value { width: 70px; text-align: center; font-weight: 700; font-size: .9rem; }
+
+  /* TAGS */
+  .tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: .75rem;
+    font-weight: 700;
+  }
+  .tag-red { background: #fed7d7; color: #c53030; }
+  .tag-green { background: #c6f6d5; color: #276749; }
+  .tag-orange { background: #feebc8; color: #c05621; }
+  .tag-blue { background: #bee3f8; color: #2b6cb0; }
+  .tag-gray { background: #e2e8f0; color: #4a5568; }
+
+  /* TIMELINE */
+  .timeline { position: relative; padding-right: 30px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    right: 8px;
+    top: 0; bottom: 0;
+    width: 3px;
+    background: var(--border);
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+    padding-right: 30px;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    right: -27px;
+    top: 6px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--accent-blue);
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 2px var(--accent-blue);
+  }
+  .timeline-item.critical::before { background: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+  .timeline-item.success::before { background: var(--accent-green); box-shadow: 0 0 0 2px var(--accent-green); }
+  .timeline-date { font-size: .8rem; color: var(--text-light); font-weight: 600; }
+  .timeline-text { font-size: .9rem; }
+
+  /* DEMAND CARD */
+  .demand {
+    border-right: 5px solid;
+    padding: 20px 24px;
+    margin: 14px 0;
+    border-radius: 0 10px 10px 0;
+    background: #fff;
+  }
+  .demand.critical { border-color: var(--accent); background: #fff5f5; }
+  .demand.high { border-color: var(--accent-orange); background: #fffaf0; }
+  .demand.medium { border-color: var(--accent-blue); background: #ebf8ff; }
+  .demand h4 { margin-bottom: 6px; }
+  .demand .demand-meta {
+    display: flex;
+    gap: 16px;
+    font-size: .8rem;
+    color: var(--text-light);
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+
+  /* SECTION ANCHOR */
+  .section-anchor { scroll-margin-top: 70px; }
+
+  /* STRATEGY BOX */
+  .strategy-box {
+    background: linear-gradient(135deg, #ebf8ff 0%, #f0fff4 100%);
+    border: 2px solid var(--accent-blue);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 16px 0;
+  }
+  .strategy-box h4 { color: var(--primary); margin-bottom: 10px; }
+  .strategy-box ul { padding-right: 20px; }
+  .strategy-box li { margin-bottom: 8px; font-size: .9rem; }
+
+  /* WARNING BOX */
+  .warning-box {
+    background: #fff5f5;
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 16px 0;
+  }
+  .warning-box h4 { color: var(--accent); margin-bottom: 10px; }
+
+  /* SUCCESS BOX */
+  .success-box {
+    background: #f0fff4;
+    border: 2px solid var(--accent-green);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 16px 0;
+  }
+  .success-box h4 { color: var(--accent-green); margin-bottom: 10px; }
+
+  /* NEGOTIATION MATRIX */
+  .matrix-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 16px 0;
+  }
+  .matrix-cell {
+    border-radius: 10px;
+    padding: 18px;
+  }
+  .matrix-cell h5 { margin-bottom: 8px; font-size: .95rem; }
+  .matrix-cell ul { padding-right: 18px; font-size: .85rem; }
+  .matrix-cell li { margin-bottom: 4px; }
+  .matrix-must { background: #fed7d7; border: 1px solid #feb2b2; }
+  .matrix-want { background: #feebc8; border: 1px solid #fbd38d; }
+  .matrix-nice { background: #bee3f8; border: 1px solid #90cdf4; }
+  .matrix-give { background: #c6f6d5; border: 1px solid #9ae6b4; }
+
+  /* PRINT */
+  @media print {
+    .header { position: static; }
+    .nav { display: none; }
+    .card { break-inside: avoid; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .container { padding: 16px; }
+    .header { padding: 20px 16px; }
+    .nav { padding: 0 16px; }
+    .matrix-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ACCORDION */
+  details { margin: 10px 0; }
+  details summary {
+    cursor: pointer;
+    font-weight: 700;
+    padding: 12px 16px;
+    background: #edf2f7;
+    border-radius: 8px;
+    font-size: .95rem;
+    list-style: none;
+  }
+  details summary::before {
+    content: '+ ';
+    font-weight: 900;
+    color: var(--primary);
+  }
+  details[open] summary::before { content: '- '; }
+  details[open] summary {
+    border-radius: 8px 8px 0 0;
+    background: var(--primary);
+    color: #fff;
+  }
+  details .detail-content {
+    padding: 18px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+  }
+
+  .highlight { background: #fefcbf; padding: 2px 6px; border-radius: 4px; font-weight: 700; }
+  .red-text { color: var(--accent); font-weight: 700; }
+  .green-text { color: var(--accent-green); font-weight: 700; }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 30px;
+    color: var(--text-light);
+    font-size: .8rem;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+
+  /* ===== LESSONS SYSTEM ===== */
+  .lessons-bar {
+    background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+    padding: 14px 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .lessons-bar .lessons-title {
+    color: #fefcbf;
+    font-weight: 700;
+    font-size: .95rem;
+    margin-left: 10px;
+    white-space: nowrap;
+  }
+  .lesson-btn {
+    background: rgba(255,255,255,.12);
+    color: #fff;
+    border: 1.5px solid rgba(255,255,255,.25);
+    padding: 8px 18px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: .85rem;
+    font-weight: 600;
+    font-family: inherit;
+    transition: all .25s;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .lesson-btn:hover { background: rgba(255,255,255,.25); border-color: rgba(255,255,255,.5); transform: translateY(-1px); }
+  .lesson-btn .lesson-num {
+    background: rgba(255,255,255,.2);
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: .75rem;
+  }
+  .lesson-btn.completed { border-color: var(--accent-green); }
+  .lesson-btn.completed .lesson-num { background: var(--accent-green); }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.6);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    backdrop-filter: blur(4px);
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: #fff;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 800px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,.4);
+    animation: modalIn .3s ease;
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: translateY(30px) scale(.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .modal-header {
+    padding: 24px 28px 18px;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .modal-header .lesson-icon {
+    width: 50px; height: 50px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    color: #fff;
+  }
+  .modal-header h3 { font-size: 1.2rem; color: var(--primary); }
+  .modal-header .lesson-sub { font-size: .85rem; color: var(--text-light); margin-top: 2px; }
+  .modal-close {
+    margin-right: auto;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-light);
+    padding: 4px 8px;
+    border-radius: 8px;
+    line-height: 1;
+  }
+  .modal-close:hover { background: #edf2f7; color: var(--text); }
+
+  .modal-body {
+    padding: 24px 28px;
+    overflow-y: auto;
+    flex: 1;
+    font-size: .95rem;
+    line-height: 1.9;
+  }
+  .modal-body h4 { color: var(--primary); margin: 18px 0 8px; font-size: 1.05rem; }
+  .modal-body h4:first-child { margin-top: 0; }
+  .modal-body ul, .modal-body ol { padding-right: 22px; margin: 8px 0; }
+  .modal-body li { margin-bottom: 6px; }
+  .modal-body .key-point {
+    background: #ebf8ff;
+    border-right: 4px solid var(--accent-blue);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-weight: 600;
+  }
+  .modal-body .warning-point {
+    background: #fff5f5;
+    border-right: 4px solid var(--accent);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+  }
+
+  /* AUDIO CONTROLS */
+  .modal-footer {
+    padding: 16px 28px;
+    border-top: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .audio-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    border-radius: 25px;
+    border: none;
+    font-size: .9rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all .2s;
+  }
+  .audio-btn.play { background: var(--accent-blue); color: #fff; }
+  .audio-btn.play:hover { background: #2b6cb0; }
+  .audio-btn.play.speaking { background: var(--accent-orange); }
+  .audio-btn.pause { background: #edf2f7; color: var(--text); }
+  .audio-btn.pause:hover { background: #e2e8f0; }
+  .audio-btn.stop { background: #fed7d7; color: var(--accent); }
+  .audio-btn.stop:hover { background: #feb2b2; }
+
+  .speed-control {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-right: auto;
+    font-size: .8rem;
+    color: var(--text-light);
+  }
+  .speed-control select {
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    font-size: .8rem;
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  .nav-lesson-btns {
+    display: flex;
+    gap: 8px;
+  }
+  .nav-lesson-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: #fff;
+    cursor: pointer;
+    font-size: .85rem;
+    font-weight: 600;
+    font-family: inherit;
+    transition: all .2s;
+  }
+  .nav-lesson-btn:hover { background: #edf2f7; border-color: var(--primary); color: var(--primary); }
+  .nav-lesson-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+  /* Progress indicator in bar */
+  .lessons-progress {
+    color: rgba(255,255,255,.6);
+    font-size: .8rem;
+    margin-right: auto;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 768px) {
+    .lessons-bar { padding: 12px 16px; }
+    .modal { max-height: 92vh; }
+    .modal-header, .modal-body, .modal-footer { padding-right: 18px; padding-left: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== PASSWORD LOCK SCREEN ===================== -->
+<div id="lockScreen" style="
+  position:fixed; inset:0; z-index:9999;
+  background:linear-gradient(135deg,#1a202c 0%,#2d3748 100%);
+  display:flex; align-items:center; justify-content:center;
+  flex-direction:column; gap:20px;
+  font-family:'Segoe UI',Tahoma,Arial,sans-serif; direction:rtl;
+">
+  <div style="text-align:center;">
+    <div style="font-size:3rem;margin-bottom:10px;">&#128274;</div>
+    <h2 style="color:#fff;font-size:1.4rem;margin-bottom:4px;">מסמך מוגן בסיסמה</h2>
+    <p style="color:#a0aec0;font-size:.9rem;">דשבורד מו"מ | שכונת אלי כהן, תל מונד</p>
+    <p style="color:#718096;font-size:.8rem;margin-top:2px;">מסמך סודי - לצוות המו"מ בלבד</p>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:12px;width:300px;max-width:90vw;">
+    <input id="passInput" type="password" placeholder="הקלידו סיסמה..."
+      autocomplete="off" autofocus
+      style="
+        width:100%; padding:14px 20px; border-radius:12px; border:2px solid #4a5568;
+        background:#2d3748; color:#fff; font-size:1rem; text-align:center;
+        font-family:inherit; outline:none; transition:border-color .2s;
+      "
+      onfocus="this.style.borderColor='#4299e1'"
+      onblur="this.style.borderColor='#4a5568'"
+      onkeydown="if(event.key==='Enter')checkPass()"
+    />
+    <button onclick="checkPass()" style="
+      width:100%; padding:14px; border-radius:12px; border:none;
+      background:#4299e1; color:#fff; font-size:1rem; font-weight:700;
+      cursor:pointer; font-family:inherit; transition:background .2s;
+    " onmouseover="this.style.background='#3182ce'" onmouseout="this.style.background='#4299e1'">
+      כניסה
+    </button>
+    <div id="passError" style="color:#fc8181;font-size:.85rem;min-height:20px;"></div>
+  </div>
+</div>
+
+<script>
+function checkPass() {
+  const input = document.getElementById('passInput');
+  const val = input.value;
+  // Simple hash check to avoid plaintext in source
+  if (val === atob('U3BpdmFrMjAyNg==')) {
+    document.getElementById('lockScreen').style.display = 'none';
+    sessionStorage.setItem('dash_auth', '1');
+  } else {
+    document.getElementById('passError').textContent = 'סיסמה שגויה, נסו שוב';
+    input.value = '';
+    input.style.borderColor = '#fc8181';
+    setTimeout(() => { input.style.borderColor = '#4a5568'; }, 1500);
+  }
+}
+// Remember session
+if (sessionStorage.getItem('dash_auth') === '1') {
+  document.getElementById('lockScreen').style.display = 'none';
+}
+</script>
+
+<!-- ===================== AI DISCLAIMER ===================== -->
+<div style="background:#fefcbf;color:#744210;text-align:center;padding:10px 20px;font-size:.85rem;font-weight:600;border-bottom:2px solid #ecc94b;">
+  &#9888; מסמך זה הופק באמצעות ניתוח בינה מלאכותית (AI) של מסמכי התיק. המידע מבוסס על ניתוח אוטומטי ויש לאמתו מול המסמכים המקוריים.
+</div>
+
+<!-- ===================== HEADER ===================== -->
+<div class="header">
+  <h1>דשבורד מו"מ | שכונת אלי כהן, תל מונד</h1>
+  <div class="subtitle">תכנית 457-0791384 | התחדשות עירונית - פינוי ובינוי | מועצה מקומית תל מונד מול אב-גד במושבה בע"מ</div>
+  <div class="header-meta">
+    <span>יזם: אב-גד במושבה בע"מ</span>
+    <span>ח.פ: 515069847</span>
+    <span>שטח: ~15 דונם</span>
+    <span>עתירה מנהלית: תלויה ועומדת</span>
+  </div>
+</div>
+
+<!-- ===================== LESSONS BAR ===================== -->
+<div class="lessons-bar" id="lessonsBar">
+  <div class="lessons-title">&#127891; שיעורי הכנה למו"מ:</div>
+  <button class="lesson-btn" onclick="openLesson(0)"><span class="lesson-num">1</span>סיפור הפרויקט</button>
+  <button class="lesson-btn" onclick="openLesson(1)"><span class="lesson-num">2</span>הצדדים והשחקנים</button>
+  <button class="lesson-btn" onclick="openLesson(2)"><span class="lesson-num">3</span>מה ביקשנו ומה קיבלנו</button>
+  <button class="lesson-btn" onclick="openLesson(3)"><span class="lesson-num">4</span>הרווח של היזם</button>
+  <button class="lesson-btn" onclick="openLesson(4)"><span class="lesson-num">5</span>החניה והתחבורה</button>
+  <button class="lesson-btn" onclick="openLesson(5)"><span class="lesson-num">6</span>ההליכים המשפטיים</button>
+  <button class="lesson-btn" onclick="openLesson(6)"><span class="lesson-num">7</span>הכנה אחרונה למו"מ</button>
+  <div class="lessons-progress" id="lessonsProgress">0/7 הושלמו</div>
+</div>
+
+<!-- ===================== NAVIGATION ===================== -->
+<div class="nav">
+  <a href="#overview">סקירה כללית</a>
+  <a href="#timeline">ציר זמן</a>
+  <a href="#public-spaces">שטחי ציבור</a>
+  <a href="#profit">רווח יזמי</a>
+  <a href="#parking">חניה ותחבורה</a>
+  <a href="#drainage">ניקוז</a>
+  <a href="#height">גובה ומרחקים</a>
+  <a href="#comparison">השוואה לאבן יהודה</a>
+  <a href="#demands">רשימת דרישות</a>
+  <a href="#strategy">אסטרטגיית מו"מ</a>
+  <a href="#redlines">קווים אדומים</a>
+</div>
+
+<!-- ===================== MAIN CONTENT ===================== -->
+<div class="container">
+
+<!-- ===== SECTION: OVERVIEW ===== -->
+<div id="overview" class="section-anchor"></div>
+
+<div class="kpi-grid">
+  <div class="kpi red">
+    <div class="label">רווח יזמי נוכחי</div>
+    <div class="value">25.2%</div>
+    <div class="sub">מקובל בתקן: 16% | פער: +9.2%</div>
+  </div>
+  <div class="kpi orange">
+    <div class="label">יח"ד מאושרות</div>
+    <div class="value">370</div>
+    <div class="sub">דרישת המועצה: 345 | הפחתה: 25</div>
+  </div>
+  <div class="kpi red">
+    <div class="label">שטחי ציבור מאושרים</div>
+    <div class="value">~700 מ"ר</div>
+    <div class="sub">דרישת המועצה: 1,100 מ"ר | חסר: 400 מ"ר</div>
+  </div>
+  <div class="kpi orange">
+    <div class="label">תקן חניה</div>
+    <div class="value">1:1.3</div>
+    <div class="sub">דרישת המועצה: 1:1.5 | חסר: ~74 חניות</div>
+  </div>
+  <div class="kpi blue">
+    <div class="label">מכפיל יח"ד</div>
+    <div class="value">x3.6</div>
+    <div class="sub">מ-102 ל-370 יח"ד</div>
+  </div>
+  <div class="kpi green">
+    <div class="label">הכנסות צפויות (מצגת בורסה)</div>
+    <div class="value">881M &#8362;</div>
+    <div class="sub">רווח גולמי צפוי: ~36%</div>
+  </div>
+</div>
+
+<!-- OVERVIEW CARD -->
+<div class="card">
+  <div class="card-header">
+    <div class="icon" style="background:#ebf8ff;color:var(--accent-blue);">&#128506;</div>
+    <h2>סקירה כללית של הפרויקט</h2>
+  </div>
+
+  <table>
+    <tr><th style="width:220px;">פרמטר</th><th>מצב קיים</th><th>מצב מאושר (יזם)</th><th>דרישת המועצה</th></tr>
+    <tr>
+      <td><strong>יחידות דיור</strong></td>
+      <td>102 יח"ד (5 מבני רכבת, 3 קומות)</td>
+      <td>370 יח"ד (10 מבנים, 8-10 קומות)</td>
+      <td>345 יח"ד (הפחתת 25 יח"ד)</td>
+    </tr>
+    <tr>
+      <td><strong>גודל דירה ממוצע</strong></td>
+      <td>71 מ"ר (חלק 53-62 מ"ר)</td>
+      <td>120 מ"ר (עיקרי + ממ"ד)</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td><strong>שטחי ציבור מבונים</strong></td>
+      <td>~1,293 מ"ר (ייעוד "חום" קיים)</td>
+      <td>~700 מ"ר (300+400 קירוי)</td>
+      <td>1,100 מ"ר עיקרי + קירוי ושירות</td>
+    </tr>
+    <tr>
+      <td><strong>תקן חניה</strong></td>
+      <td>-</td>
+      <td>1:1.3</td>
+      <td>1:1.5</td>
+    </tr>
+    <tr>
+      <td><strong>רווח יזמי</strong></td>
+      <td>-</td>
+      <td>25.2% (דו"ח כלכלי) / ~36% (מצגת בורסה)</td>
+      <td>~16% (תקן 21.1)</td>
+    </tr>
+    <tr>
+      <td><strong>צפיפות</strong></td>
+      <td>11 יח"ד/דונם</td>
+      <td>41 יח"ד/דונם</td>
+      <td>~23 יח"ד/דונם (345/15)</td>
+    </tr>
+    <tr>
+      <td><strong>שטח מסחר</strong></td>
+      <td>~175 מ"ר</td>
+      <td>~200 מ"ר + 20 מ"ר שירות</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td><strong>שצ"פ</strong></td>
+      <td>~1.4 דונם</td>
+      <td>שצ"פ מרכזי + חיבור לנחל חירות</td>
+      <td>ריכוז לגינה מרכזית אפקטיבית</td>
+    </tr>
+    <tr>
+      <td><strong>ניקוז</strong></td>
+      <td>שטח ניקוז ~850 מ"ר</td>
+      <td>מתקנים בשצ"פ (ציבורי)</td>
+      <td>מתקנים בשטח פרטי (על חשבון היזם)</td>
+    </tr>
+  </table>
+</div>
+
+<!-- ===== SECTION: TIMELINE ===== -->
+<div id="timeline" class="section-anchor"></div>
+<div class="card">
+  <div class="card-header">
+    <div class="icon" style="background:#feebc8;color:var(--accent-orange);">&#128197;</div>
+    <h2>ציר זמן - השתלשלות ההליכים</h2>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-date">11.03.2024</div>
+      <div class="timeline-text">דיון בוועדת משנה להתחדשות עירונית - החלטה על הפקדה בתנאים</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">08.12.2024</div>
+      <div class="timeline-text">מצגת היזם לבורסה - חושפת הכנסות צפויות של 881 מיליון ש"ח ורווח גולמי ~36%</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">20.12.2024</div>
+      <div class="timeline-text">פרסום התכנית להפקדה - הוגשו 5 התנגדויות (3 בזמן, 2 באיחור)</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">25.02.2025</div>
+      <div class="timeline-text">הפקדה רשמית של התכנית</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">09.04.2025</div>
+      <div class="timeline-text">תיקון מצגת בורסה - סך הכנסות צפוי: 881,000,000 ש"ח</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">23.04.2025</div>
+      <div class="timeline-text">דיון בהתנגדויות בוועדת משנה - הוועדה המחוזית מחליטה על תיקונים חלקיים: תוספת 400 מ"ר לשטחי ציבור, דחיית רוב טענות המועצה</div>
+    </div>
+    <div class="timeline-item critical">
+      <div class="timeline-date">05.05.2025</div>
+      <div class="timeline-text"><strong>הוועדה המחוזית מרכז מאשרת את התכנית</strong> - רוב הטענות נדחו. ההחלטה היא הבסיס לערר</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">07.08.2025</div>
+      <div class="timeline-text">דיון בערר בפני ועדת המשנה לעררים (מועצה ארצית) - הצדדים נשלחו לגבש הסכמות תוך 14 יום</div>
+    </div>
+    <div class="timeline-item critical">
+      <div class="timeline-date">21.08.2025</div>
+      <div class="timeline-text"><strong>הצדדים מודיעים: לא הושגה הסכמה</strong></div>
+    </div>
+    <div class="timeline-item critical">
+      <div class="timeline-date">09.11.2025</div>
+      <div class="timeline-text"><strong>ועדת המשנה לעררים דוחה את הערר במלואו</strong> - בנימוקים לקוניים, ללא בחינה עצמאית DE NOVO</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">עד 24.12.2025</div>
+      <div class="timeline-text">מועד אחרון להגשת עתירה מנהלית</div>
+    </div>
+    <div class="timeline-item success">
+      <div class="timeline-date">הוגשה</div>
+      <div class="timeline-text"><strong>עתירה מנהלית הוגשה לבית המשפט המחוזי מרכז-לוד</strong> - תלויה ועומדת. ע"י עו"ד ענת בירן (רקם)</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION: PUBLIC SPACES ===== -->
+<div id="public-spaces" class="section-anchor"></div>
+<div class="card">
+  <div class="card-header">
+    <div class="icon" style="background:#fed7d7;color:var(--accent);">&#127963;</div>
+    <h2>שטחי ציבור - הסוגיה המרכזית</h2>
+    <span class="badge tag-red">חסר קריטי: ~400 מ"ר</span>
+  </div>
+
+  <h3 style="margin-bottom:12px;">מצב נוכחי מול דרישה</h3>
+  <div class="compare-bar">
+    <div class="bar-label">מאושר</div>
+    <div class="bar-track">
+      <div class="bar-fill" style="width:63%;background:var(--accent);">~700 מ"ר</div>
+    </div>
+    <div class="bar-value red-text">~700 מ"ר</div>
+  </div>
+  <div class="compare-bar">
+    <div class="bar-label">נדרש (מועצה)</div>
+    <div class="bar-track">
+      <div class="bar-fill" style="width:100%;background:var(--accent-green);">1,100 מ"ר</div>
+    </div>
+    <div class="bar-value green-text">1,100 מ"ר</div>
+  </div>
+
+  <details style="margin-top:20px;">
+    <summary>פירוט הפרוגרמה הנדרשת (ד"ר חוה ארליך)</summary>
+    <div class="detail-content">
+      <table>
+        <tr><th>שימוש</th><th>כמות</th><th>שטח נדרש</th><th>הערה</th></tr>
+        <tr><td>כיתות גן ילדים</td><td>3 כיתות</td><td>~300 מ"ר</td><td>מותאם לגודל אוכלוסיה צפוי</td></tr>
+        <tr><td>כיתות מעונות יום</td><td>3 כיתות</td><td>~300 מ"ר</td><td>מותאם לגילאי 0-3</td></tr>
+        <tr><td>קירוי חצרות גנ"י/מעונות</td><td>-</td><td>~300 מ"ר</td><td>נוסף על שטחים עיקריים</td></tr>
+        <tr><td>שימושי ציבור אחרים</td><td>-</td><td>~200 מ"ר</td><td>בריאות, רווחה, דת, קהילה, מועדון</td></tr>
+        <tr><td><strong>סה"כ עיקרי נדרש</strong></td><td>-</td><td><strong>~1,100 מ"ר</strong></td><td><strong>לא כולל קירוי</strong></td></tr>
+      </table>
+    </div>
+  </details>
+
+  <details>
+    <summary>הטעות בחישוב הפרוגרמה של הוועדה המחוזית</summary>
+    <div class="detail-content">
+      <div class="warning-box">
+        <h4>טעות שיטתית קריטית</h4>
+        <p>הוועדה המחוזית חישבה פרוגרמה <strong>רק ליח"ד תוספתיות</strong> (268 = 370-102), תוך הנחה שקיים מענה לאוכלוסיה הנוכחית.</p>
+        <p style="margin-top:10px;"><strong>למה זו טעות:</strong></p>
+        <ul style="padding-right:20px;margin-top:6px;">
+          <li><strong>שינוי אוכלוסיה:</strong> הדירות הקיימות (53-62 מ"ר) מאוכלסות במשקי בית קטנים ומבוגרים. הדירות החדשות (120 מ"ר) ימשכו משפחות צעירות גדולות (3.5 נפשות) - הצרכים שונים לחלוטין</li>
+          <li><strong>אוכלוסיה לא חוזרת:</strong> בפרויקטים דומים, רוב הדיירים הקיימים לא חוזרים - מגיעה אוכלוסיה חדשה לגמרי</li>
+          <li><strong>ביטול שטח "חום" קיים:</strong> ~1,293 מ"ר בייעוד מבני ציבור (תכנית הצ/11/2 משנות ה-60) מבוטלים - המענה הקיים נעלם!</li>
+          <li><strong>מתודולוגיה שגויה:</strong> לא מפחיתים יח"ד אלא אוכלוסיה - ויש להשתמש בפרמטרים העתידיים, לא ההיסטוריים</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>בעיית מוסדות החינוך</summary>
+    <div class="detail-content">
+      <p>לפי הפרוגרמה, מימוש התכנית יצור צורך ב:</p>
+      <ul style="padding-right:20px;margin:10px 0;">
+        <li><strong>4 כיתות יסוד</strong> + <strong>4 כיתות על-יסודיות</strong></li>
+      </ul>
+      <div class="warning-box">
+        <h4>המועצה לא מסוגלת לקלוט עוד תלמידים</h4>
+        <ul style="padding-right:20px;margin-top:8px;">
+          <li>קריית החינוך הקיימת <strong>מנוצלת עד תום</strong></li>
+          <li>שטח "פנוי" לכאורה בקריה מיועד כבר להרחבות עבור ~<strong>2,000 יח"ד חדשות אחרות</strong> בשלבי פיתוח</li>
+          <li>הוועדה המחוזית אמרה ש"התכנית קטנה מכדי להקצות שטח לבית ספר" ושלחה את המועצה לפתור בעצמה</li>
+          <li>היזם <strong>לא נדרש</strong> להציג קיבולת ריאלית של כיתות - התבסס על בדיקה כללית ולא מבוססת</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>פריסת שצ"פ - בעיה תכנונית</summary>
+    <div class="detail-content">
+      <p>השטחים הציבוריים הפתוחים <strong>לא אפקטיביים</strong>:</p>
+      <ul style="padding-right:20px;margin:10px 0;">
+        <li>חלקם נספרים כחצרות של גני ילדים סמוכים</li>
+        <li>חלקם משמשים למעבר, פריקה/טעינה וחירום</li>
+        <li>חלקם פרושים באופן שלא מאפשר ניצול אפקטיבי</li>
+        <li><strong>אין גינה מרכזית</strong> אמיתית שתשמש את התושבים</li>
+      </ul>
+      <p><strong>דרישת המועצה:</strong> ריכוז שטחים לגינה מרכזית משמעותית - נדחתה.</p>
+    </div>
+  </details>
+</div>
+
+<!-- ===== SECTION: PROFIT ===== -->
+<div id="profit" class="section-anchor"></div>
+<div class="card">
+  <div class="card-header">
+    <div class="icon" style="background:#feebc8;color:var(--accent-orange);">&#128176;</div>
+    <h2>ניתוח רווח יזמי - הקלף המרכזי במו"מ</h2>
+    <span class="badge tag-red">עודף: +9.2% מהמקובל</span>
+  </div>
+
+  <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);">
+    <div class="kpi red">
+      <div class="label">רווח לפי דו"ח כלכלי</div>
+      <div class="value">25.2%</div>
+    </div>
+    <div class="kpi orange">
+      <div class="label">רווח גולמי (מצגת בורסה)</div>
+      <div class="value">~36%</div>
+    </div>
+    <div class="kpi green">
+      <div class="label">תקן 21.1 (מקובל)</div>
+      <div class="value">16%</div>
+    </div>
+    <div class="kpi blue">
+      <div class="label">סך הכנסות צפויות</div>
+      <div class="value">881M</div>
+    </div>
+  </div>
+
+  <details>
+    <summary>מדוע הרווח גבוה מהמוצג - ניתוח מעמיק</summary>
+    <div class="detail-content">
+      <h4 style="margin-bottom:10px;">שלוש בעיות בדו"ח הכלכלי של היזם:</h4>
+
+      <div class="warning-box">
+        <h4>1. הפחתת מחירי פלדלת מלאכותית</h4>
+        <p>שמאית היזם עצמה מציינת שסקר המחירים מראה ממוצע של <strong>29,000 &#8362;/מ"ר</strong>.</p>
+        <p>אבל בתחשיב הכניסה <strong>28,625 &#8362;/מ"ר</strong> - הפחתה מכוונת כדי להקטין את שורת הרווח!</p>
+        <p>לפי ניתוח המועצה, השווי האמיתי הוא לפחות <strong>30,000 &#8362;/מ"ר</strong>.</p>
+        <p style="margin-top:8px;"><strong>משמעות:</strong> הרווח האמיתי <span class="red-text">גבוה מ-25.2%</span></p>
+      </div>
+
+      <div class="warning-box">
+        <h4>2. פער בין דו"ח כלכלי למצגת הבורסה</h4>
+        <p>בדו"ח הכלכלי: הכנסות של 796,598,260 &#8362; (ללא מע"מ)</p>
+        <p>במצגת הבורסה (09.04.2025): <strong>881,000,000 &#8362;</strong></p>
+        <p>רווח גולמי צפוי: <strong>~36%</strong></p>
+        <p style="margin-top:8px;">הפער בין מה שהיזם מציג למשקיעים לבין מה שהציג לוועדה = <span class="red-text">~84 מיליון &#8362;</span></p>
+      </div>
+
+      <div class="warning-box">
+        <h4>3. שמאי המחוז אימץ ללא ביקורת</h4>
+        <p>שמאי המחוז אימץ את הדו"ח הכלכלי כפי שהוא - כולל עלויות הבניה, התמורות הנמוכות, והרווח המנופח.</p>
+        <p>משמעות: <strong>אישור דה-פקטו</strong> של רווח ב-9%+ מעל המקובל.</p>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>מה אפשר "לקנות" ברווח העודף - תרגום לדרישות מעשיות</summary>
+    <div class="detail-content">
+      <div class="success-box">
+        <h4>הרווח העודף מאפשר את כל הדרישות ביחד:</h4>
+        <table style="margin-top:12px;">
+          <tr><th>דרישה</th><th>עלות מוערכת</th><th>השפעה על רווח</th></tr>
+          <tr>
+            <td>הגדלת שטחי ציבור ל-1,100 מ"ר</td>
+            <td>עלות בניה + ויתור על שטח מגורים</td>
+            <td>~2-3% מהרווח</td>
+          </tr>
+          <tr>
+            <td>הפחתת 25 יח"ד (מ-370 ל-345)</td>
+            <td>ויתור על ~25 דירות</td>
+            <td>~3-4% מהרווח</td>
+          </tr>
+          <tr>
+            <td>הגדלת תקן חניה ל-1:1.5</td>
+            <td>74 חניות נוספות (בעיקר תת-קרקעי)</td>
+            <td>~1-2% מהרווח</td>
+          </tr>
+          <tr>
+            <td>העברת מתקני ניקוז לשטח פרטי</td>
+            <td>שינוי תכנון + עלות בניה</td>
+            <td>~0.5% מהרווח</td>
+          </tr>
+          <tr style="background:#f0fff4;">
+            <td><strong>סה"כ</strong></td>
+            <td>-</td>
+            <td><strong>~7-9%</strong> - עדיין נשאר רווח של <span class="green-text">~16-18%</span></td>
+          </tr>
+        </table>
+        <p style="margin-top:12px;font-weight:700;">מסקנה: גם לאחר קבלת <u>כל</u> דרישות המועצה, הפרויקט נשאר רווחי בהתאם לתקן 21.1 ולמקובל בשוק!</p>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>תקן 21.1 - מה הוא אומר</summary>
+    <div class="detail-content">
+      <p><strong>תקן 21.1</strong> = תקן בדבר פירוט מזערי נדרש בשומות מקרקעין המבוצעות לצורך בדיקה שמאית-כלכלית לתכנית פינוי-בינוי.</p>
+      <ul style="padding-right:20px;margin:10px 0;">
+        <li>מטרתו: לאפשר לרשויות תכנון <strong>לבחון היתכנות כלכלית</strong></li>
+        <li>קובע רווח יזמי <strong>מינימלי</strong> כ"סף מקובל מינימאלי"</li>
+        <li>באזור השרון: <strong>16%</strong> מעלויות הפרויקט</li>
+        <li>ועדת הערר אישרה שאין מניעה לרווח גבוה יותר "כל עוד הדבר מיטיב עם התכנית"</li>
+        <li><strong>אבל:</strong> רווח גבוה שלא מיטיב עם התכנית = לא מוצדק</li>
+      </ul>
+      <div class="strategy-box">
+        <h4>כיצד להשתמש בזה במו"מ</h4>
+        <p>הטענה: הרווח גבוה ב-9%+ מהסף - אבל התכנית <strong>לא מיטיבה בהתאם</strong>. שטחי הציבור חסרים, החניה לא מספקת. אם הרווח היה 16% - היינו מקבלים את זה. אבל כש-25.2%, חייבים לקבל יותר בתמורה.</p>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- ===== SECTION: PARKING ===== -->
+<div id="parking" class="section-anchor"></div>
+<div class="card">
+  <div class="card-header">
+    <div class="icon" style="background:#feebc8;color:var(--accent-orange);">&#128663;</div>
+    <h2>חניה ותחבורה</h2>
+    <span class="badge tag-orange">חסר: ~74 חניות</span>
+  </div>
+
+  <div class="compare-bar">
+    <div class="bar-label">תקן מינימלי (תקנות)</div>
+    <div class="bar-track">
+      <div class="bar-fill" style="width:67%;background:#a0aec0;">1:1</div>
+    </div>
+    <div class="bar-value">1:1</div>
+  </div>
+  <div class="compare-bar">
+    <div class="bar-label">מאושר</div>
+    <div class="bar-track">
+      <div class="bar-fill" style="width:87%;background:var(--accent-orange);">1:1.3</div>
+    </div>
+    <div class="bar-value" style="color:var(--accent-orange);">1:1.3</div>
+  </div>
+  <div class="compare-bar">
+    <div class="bar-label">דרישת המועצה</div>
+    <div class="bar-track">
+      <div class="bar-fill" style="width:100%;background:var(--accent-green);">1:1.5</div>
+    </div>
+    <div class="bar-value green-text">1:1.5</div>
+  </div>
+
+  <details style="margin-top:16px;">
+    <summary>למה 1:1.3 לא מספיק - ניתוח מקיף</summary>
+    <div class="detail-content">
+      <div class="warning-box">
+        <h4>העובדות</h4>
+        <ul style="padding-right:20px;">
+          <li>תל מונד דירוג <strong>182</strong> מתוך כל היישובים במדדי תחבורה ציבורית</li>
+          <li><strong>אין רשת מתע"ן</strong> (מסילה קלה/כבדה) בתחום הישוב</li>
+          <li>שירותי התח"צ <strong>מוסכם שאינם נותנים מענה מספק</strong></li>
+          <li>הוועדה המחוזית <strong>הודתה</strong> שלא הסתמכה על תח"צ - אבל לא העלתה את התקן</li>
+          <li>אפילו הוועדה המרחבית שרונים ציינה שתקן <strong>1:1.5 יתאים לתכנית</strong></li>
+        </ul>
+      </div>
+
+      <h4 style="margin:16px 0 8px;">בשפת מספרים:</h4>
+      <table>
+        <tr><th>תקן</th><th>חניות ל-370 יח"ד</th><th>פער</th></tr>
+        <tr><td>1:1 (מינימום תקנות)</td><td>370</td><td>-</td></tr>
+        <tr><td>1:1.3 (מאושר)</td><td>481</td><td>+111 מעל מינימום</td></tr>
+        <tr style="background:#f0fff4;"><td><strong>1:1.5 (דרישה)</strong></td><td><strong>555</strong></td><td><strong>+74 מעל מאושר</strong></td></tr>
+      </table>
+      <p style="margin-top:10px;">74 מקומות חניה נוספים = <strong>ההבדל בין שכונה מתפקדת לסיוט תחבורתי</strong></p>
+    </div>
+  </details>
+
+  <details>
+    <summary>בעיית רחוב הסביון והעדר בדיקה תחבורתית</summary>
+    <div class="detail-content">
+      <ul style="padding-right:20px;">
+        <li><strong>רחוב הסביון</strong> = הכניסה והיציאה העיקרית מהישוב דרך תל מונד</li>
+        <li>מאושר סטטוטורית ב-<strong>16 מ' רוחב</strong>, אבל בפועל רק <strong>8 מ' רוחב</strong></li>
+        <li>תוספת ~270 יח"ד תגרום לתנועה כבדה ברחוב צר זה</li>
+        <li>הוועדה טענה שמדובר ב-"3 רכבים בדקה" - <strong>אבל לא נערכה בדיקת השפעות תחבורתיות (בה"ת)</strong></li>
+        <li>הכיכרות המרכזיות - <strong>לא ניתן בפועל להרחיבן</strong> למלוא הרוחב הסטטוטורי</li>
+      </ul>
+      <div class="strategy-box">
+        <h4>דרישת המועצה</h4>
+        <ul>
+          <li>הרחבת רחוב הסביון למלוא רוחבו הסטטוטורי כחלק מהתכנית</li>
+          <li>עריכת בדיקת השפעות תחבורתיות מקיפה</li>
+          <li>הגדלת תקן חניה ל-1:1.5</li>
+          <li>תוספת חניות אורחים</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- ===== SECTION: DRAINAGE ===== -->
+<div id="drainage" class="section-anchor"></div>
+<div class="card">
+  <div class="card-header">
+    <div class="icon" style="background:#bee3f8;color:var(--accent-blue);">&#128167;</div>
+    <h2>ניקוז מי נגר</h2>
+  </div>
+
+  <details>
+    <summary>הבעיה: מתקנים פרטיים על קרקע ציבורית</summary>
+    <div class="detail-content">
+      <div class="warning-box">
+        <h4>שלוש בעיות בפתרון הניקוז</h4>
+        <ul style="padding-right:20px;margin-top:8px;">
+          <li><strong>מתקנים פרטיים בשצ"פ:</strong> מתקני מי הנגר הם מתקנים פרטיים - אמורים להיות בשטח הפרטי על חשבון היזם, לא בשצ"פ ציבורי</li>
+          <li><strong>העדר בחינת נגר חיצוני:</strong> לא נבדקה השפעת נגר המגיע מחוץ לשטח התכנית - שיפועי הקרקע מוטים כלפי שטח התכנית!</li>
+          <li><strong>חישוב שגוי:</strong> החישוב במחשבון ניהול מי נגר נעשה לפי "אזור השפלה" במקום "מישור החוף" - משנה את התוצאה</li>
+        </ul>
+      </div>
+      <p style="margin-top:12px;"><strong>דרישת המועצה:</strong></p>
+      <ul style="padding-right:20px;">
+        <li>מיקום מתקני ניקוז בשטח פרטי</li>
+        <li>הסכם תחזוקה מול המועצה על חשבון היזם</li>
+        <li>בחינת השפעת נגר חיצוני</li>
+      </ul>
+    </div>
+  </details>
+</div>
+
+<!-- ===== SECTION: HEIGHT ===== -->
+<div id="height" class="section-anchor"></div>
+<div class="card">
+  <div class="card-header">
+    <div class="icon" style="background:#e9d8fd;color:#6b46c1;">&#127970;</div>
+    <h2>גובה מבנים ומרחקים</h2>
+  </div>
+
+  <details>
+    <summary>הבעיה: 8-10 קומות ליד צמודי קרקע</summary>
+    <div class="detail-content">
+      <ul style="padding-right:20px;">
+        <li>תל מונד = אופי <strong>כפרי-עירוני</strong>. תכנית ההתחדשות <strong>הראשונה</strong> מסוגה</li>
+        <li>המרחק בין המבנים המוצעים לצמודי הקרקע הגובלים: <strong>~13 מ'</strong></li>
+        <li>אבל בפועל עם מרפסות (גזוזטראות): <strong>~11 מ' בלבד</strong></li>
+        <li>במצב הקיים, המרחק בין חזיתות היה <strong>22-27 מ'</strong> (עם רחוב איריס שמבוטל)</li>
+        <li>הוועדה המחוזית הוסיפה קומה 9 למבנה האחורי כדי לפצות על שטחים שהוקצו לציבור</li>
+      </ul>
+
+      <div class="strategy-box">
+        <h4>עמדת המועצה</h4>
+        <ul>
+          <li>גובה מקסימלי: <strong>7 קומות + גג</strong> (במקום 10)</li>
+          <li>הגדלת המרחק בין מבנים מוצעים לקיימים</li>
+          <li>שמירה על אופי כפרי-עירוני</li>
+        </ul>
+        <p style="margin-top:10px;"><strong>חשוב:</strong> ועדת הערר דחתה טענה זו - בית המשפט ימעט להתערב בשיקול דעת תכנוני. <u>נושא זה חלש יותר למו"מ</u> אך יכול לשמש כוויתור טקטי.</p>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- ===== SECTION: COMPARISON ===== -->
+<div id="comparison" class="section-anchor"></div>
+<div class="card">
+  <div class="card-header">
+    <div class="icon" style="background:#c6f6d5;color:var(--accent-green);">&#9878;</div>
+    <h2>השוואה לתכנית אבן יהודה - טענת "איפה ואיפה"</h2>
+    <span class="badge tag-green">טענה חזקה</span>
+  </div>
+
+  <div class="warning-box" style="border-color:var(--accent-blue);background:#ebf8ff;">
+    <h4 style="color:var(--accent-blue);">ממצא מפתח שהתגלה לאחר החלטת ועדת הערר</h4>
+    <p>ביישוב הסמוך <strong>אבן יהודה</strong> (אותה ועדה מרחבית - שרונים!) אושרה בהפקדה תכנית דומה מאוד:</p>
+  </div>
+
+  <table style="margin-top:16px;">
+    <tr><th style="width:200px;">פרמטר</th><th>תל מונד (מאושר)</th><th>אבן יהודה (הפקדה)</th><th>הערה</th></tr>
+    <tr>
+      <td>יח"ד קיימות</td>
+      <td>102</td>
+      <td>102</td>
+      <td class="green-text">זהה!</td>
+    </tr>
+    <tr>
+      <td>שטחי ציבור</td>
+      <td>~700 מ"ר</td>
+      <td>מספקים (לפי פרוגרמה)</td>
+      <td class="red-text">פער לרעת תל מונד</td>
+    </tr>
+    <tr>
+      <td>תקן חניה</td>
+      <td>1:1.3</td>
+      <td>בדומה לדרישת תל מונד</td>
+      <td class="red-text">פער לרעת תל מונד</td>
+    </tr>
+    <tr>
+      <td>ועדה מרחבית</td>
+      <td>שרונים</td>
+      <td>שרונים</td>
+      <td class="green-text">אותה ועדה!</td>
+    </tr>
+    <tr>
+      <td>מאפייני ישוב</td>
+      <td>כפרי-עירוני</td>
+      <td>כפרי-עירוני</td>
+      <td class="green-text">דומה מאוד</td>
+    </tr>
+  </table>
+
+  <div class="strategy-box" style="margin-top:16px;">
+    <h4>כיצד להשתמש בזה</h4>
+    <p>זוהי טענת <strong>"איפה ואיפה"</strong> חזקה מאוד: שני ישובים סמוכים, אותה ועדה מרחבית, אותו מספר יח"ד קיימות - אבל תוצאה שונה לחלוטין. זה מצביע על:</p>
+    <ul>
+      <li><strong>שרירותיות</strong> בקבלת החלטות</li>
+      <li><strong>העדר תבחינים אחידים</strong></li>
+      <li><strong>התנהלות מנהלית בלתי תקינה</strong></li>
+    </ul>
+    <p style="margin-top:8px;">בית המשפט רגיש מאוד לטענות של אי-שוויון בין ישובים.</p>
+  </div>
+</div>
+
+<!-- ===== SECTION: DEMANDS ===== -->
+<div id="demands" class="section-anchor"></div>
+<div class="card">
+  <div class="card-header">
+    <div class="icon" style="background:#fed7d7;color:var(--accent);">&#128203;</div>
+    <h2>רשימת דרישות מלאה למו"מ - מדורגת לפי עדיפות</h2>
+  </div>
+
+  <h3 style="margin:12px 0 8px;color:var(--accent);">עדיפות קריטית - חובה להשיג</h3>
+
+  <div class="demand critical">
+    <h4>1. הגדלת שטחי ציבור מבונים ל-1,100 מ"ר עיקרי</h4>
+    <p>300 מ"ר מבונים קיימים + תוספת של 400 מ"ר מהוועדה + <strong>400 מ"ר נוספים</strong> = 1,100 מ"ר. זה הפער הקריטי ביותר - בלעדיו אין מקום לגנ"י, מעונות ושירותי ציבור.</p>
+    <div class="demand-meta">
+      <span>&#128200; השפעה על רווח: ~2-3%</span>
+      <span>&#9878; בסיס משפטי: חוות דעת פרוגרמתית ד"ר ארליך</span>
+      <span>&#128161; כולל: 3 גנ"י + 3 מעונות + ~200 מ"ר שימושי ציבור</span>
+    </div>
+  </div>
+
+  <div class="demand critical">
+    <h4>2. חישוב פרוגרמה מתוקן - לכלל האוכלוסיה ולא רק לתוספת</h4>
+    <p>תיקון השגיאה המתודולוגית: הפרוגרמה צריכה להתבסס על <strong>כלל 370 יח"ד</strong> ולא על 268 תוספתיות. הנחת "מענה קיים" - שגויה בהתחדשות עירונית.</p>
+    <div class="demand-meta">
+      <span>&#9878; עקרון: שינוי מאפייני אוכלוסיה + ביטול שטח "חום" קיים</span>
+    </div>
+  </div>
+
+  <div class="demand critical">
+    <h4>3. הגדלת תקן חניה ל-1:1.5</h4>
+    <p>74 מקומות חניה נוספים. הכרחי בהעדר תחבורה ציבורית. אפילו הוועדה המרחבית שרונים תמכה.</p>
+    <div class="demand-meta">
+      <span>&#128200; השפעה על רווח: ~1-2%</span>
+      <span>&#128663; תוספת: 74 חניות</span>
+      <span>&#9878; בסיס: דירוג 182 בתח"צ, אין מתע"ן</span>
+    </div>
+  </div>
+
+  <h3 style="margin:20px 0 8px;color:var(--accent-orange);">עדיפות גבוהה - מומלץ מאוד להשיג</h3>
+
+  <div class="demand high">
+    <h4>4. הפחתת יח"ד מ-370 ל-345</h4>
+    <p>הפחתת 25 יח"ד מפחיתה עומס, צפיפות, ולחץ על תשתיות - ומשאירה ליזם רווח של ~16-18%.</p>
+    <div class="demand-meta">
+      <span>&#128200; השפעה על רווח: ~3-4%</span>
+      <span>&#127961; צפיפות מ-41 ל-23 יח"ד/דונם</span>
+    </div>
+  </div>
+
+  <div class="demand high">
+    <h4>5. העברת מתקני ניקוז לשטח פרטי + הסכם תחזוקה</h4>
+    <p>מתקנים פרטיים צריכים להיות בשטח פרטי. כולל הסכם תחזוקה מול המועצה על חשבון היזם.</p>
+    <div class="demand-meta">
+      <span>&#128200; השפעה על רווח: ~0.5%</span>
+      <span>&#128167; כולל: בחינת נגר חיצוני</span>
+    </div>
+  </div>
+
+  <div class="demand high">
+    <h4>6. בדיקת השפעות תחבורתיות (בה"ת) + הרחבת רחוב הסביון</h4>
+    <p>חובה על היזם לממן בדיקה מקיפה. הרחבת רחוב הסביון למלוא רוחבו הסטטוטורי (16 מ') כחלק מהפרויקט.</p>
+    <div class="demand-meta">
+      <span>&#128663; רחוב הסביון: מ-8 מ' ל-16 מ'</span>
+    </div>
+  </div>
+
+  <h3 style="margin:20px 0 8px;color:var(--accent-blue);">עדיפות בינונית - רצוי להשיג</h3>
+
+  <div class="demand medium">
+    <h4>7. ריכוז שצ"פ לגינה מרכזית אפקטיבית</h4>
+    <p>שטחים פתוחים מפוזרים לא אפקטיביים. יש לרכזם לגינה מרכזית שתשמש את כל התושבים.</p>
+  </div>
+
+  <div class="demand medium">
+    <h4>8. הגדלת מרחק בין מבנים מוצעים לקיימים</h4>
+    <p>מ-13 מ' (11 מ' בפועל עם מרפסות) למרחק סביר יותר - בפרט לאור ביטול רחוב איריס.</p>
+  </div>
+
+  <div class="demand medium">
+    <h4>9. תוספת חניות אורחים</h4>
+    <p>מעבר לתקן 1:1.5, נדרשות חניות אורחים בפריסה נגישה.</p>
+  </div>
+
+  <div class="demand medium">
+    <h4>10. הבטחת מסירת שטחי ציבור ברמת גמר + רישום על שם המועצה</h4>
+    <p>מנגנון חוזי ברור שמבטיח שהיזם ימסור שטחים ציבוריים מוגמרים ויירשמו על שם המועצה.</p>
+  </div>
+</div>
+
+<!-- ===== SECTION: STRATEGY ===== -->
+<div id="strategy" class="section-anchor"></div>
+<div class="card">
+  <div class="card-header">
+    <div class="icon" style="background:#c6f6d5;color:var(--accent-green);">&#9812;</div>
+    <h2>אסטרטגיית משא ומתן</h2>
+  </div>
+
+  <h3 style="margin-bottom:12px;">מטריצת מו"מ - מה חובה, מה רצוי, ומה אפשר לוותר</h3>
+  <div class="matrix-grid">
+    <div class="matrix-cell matrix-must">
+      <h5>&#128308; חובה להשיג (MUST HAVE)</h5>
+      <ul>
+        <li>1,100 מ"ר שטחי ציבור מבונים</li>
+        <li>תקן חניה 1:1.5</li>
+        <li>חישוב פרוגרמה לכלל האוכלוסיה</li>
+      </ul>
+    </div>
+    <div class="matrix-cell matrix-want">
+      <h5>&#128992; רצוי מאוד (WANT)</h5>
+      <ul>
+        <li>הפחתה ל-345 יח"ד</li>
+        <li>ניקוז בשטח פרטי + הסכם תחזוקה</li>
+        <li>הרחבת רחוב הסביון</li>
+        <li>בה"ת על חשבון היזם</li>
+      </ul>
+    </div>
+    <div class="matrix-cell matrix-nice">
+      <h5>&#128309; רצוי (NICE TO HAVE)</h5>
+      <ul>
+        <li>גינה מרכזית מרוכזת</li>
+        <li>הגדלת מרחקים בין מבנים</li>
+        <li>חניות אורחים</li>
+        <li>הגבלת גובה ל-7+גג</li>
+      </ul>
+    </div>
+    <div class="matrix-cell matrix-give">
+      <h5>&#128994; אפשר לוותר (GIVE)</h5>
+      <ul>
+        <li>הגבלת גובה מבנים (ויתור טקטי)</li>
+        <li>דרישה לנחל כמובל סגור</li>
+        <li>דרישות פריסת שצ"פ (אם מקבלים יותר שטח)</li>
+        <li>התנגדות ל-9 קומות במבנה אחורי (אם מקבלים שטחי ציבור)</li>
+      </ul>
+    </div>
+  </div>
+
+  <details style="margin-top:20px;">
+    <summary>טקטיקת מו"מ מומלצת - שלב אחר שלב</summary>
+    <div class="detail-content">
+
+      <div class="strategy-box">
+        <h4>שלב 1: פתיחה - הצגת העמדה המלאה</h4>
+        <ul>
+          <li>הציגו את <strong>כל</strong> הדרישות - גם אלה שמוכנים לוותר עליהן</li>
+          <li>הדגישו: "המועצה <strong>תומכת</strong> בהתחדשות - אנחנו לא כאן לעצור את הפרויקט"</li>
+          <li>הציגו את הפער במספרים: 25.2% מול 16% = "יש מספיק עוגה לכולם"</li>
+          <li>אזכרו את מצגת הבורסה: "אנחנו יודעים מה הרווח האמיתי"</li>
+        </ul>
+      </div>
+
+      <div class="strategy-box">
+        <h4>שלב 2: לחץ - העתירה כמנוף</h4>
+        <ul>
+          <li>העתירה <strong>תלויה ועומדת</strong> - כל עיכוב עולה ליזם כסף</li>
+          <li>"אנחנו מעדיפים הסכמות על פסק דין - אבל לא נוותר על טובת התושבים"</li>
+          <li>הזכירו את <strong>אבן יהודה</strong>: "בית המשפט יראה את האפליה"</li>
+          <li>ריביות, מימון, עיכוב פרויקט = <strong>היזם יפסיד יותר מכניעה לדרישות</strong></li>
+        </ul>
+      </div>
+
+      <div class="strategy-box">
+        <h4>שלב 3: גמישות מחושבת - ויתורים טקטיים</h4>
+        <ul>
+          <li><strong>ויתור 1:</strong> לא נתעקש על הגבלת גובה ל-7 קומות - נקבל 8-10 <strong>בתנאי</strong> שמקבלים שטחי ציבור</li>
+          <li><strong>ויתור 2:</strong> נקבל 9 קומות במבנה האחורי - <strong>בתנאי</strong> שהקומה הנוספת מוקצית לציבור</li>
+          <li><strong>ויתור 3:</strong> נגמיש בפריסת השצ"פ - <strong>בתנאי</strong> שסה"כ שטח הציבור מגיע ל-1,100</li>
+          <li><strong>ויתור 4:</strong> אם מקבלים 1:1.5, נוותר על דרישת חניות אורחים נפרדות</li>
+        </ul>
+      </div>
+
+      <div class="strategy-box">
+        <h4>שלב 4: סגירה - מנגנון הבטחה</h4>
+        <ul>
+          <li>כל הסכמה צריכה להיות <strong>מעוגנת בהוראות התכנית</strong> (לא רק בהסכם)</li>
+          <li>לוח זמנים מחייב למסירת שטחי ציבור</li>
+          <li>ערבות ביצוע להבטחת מסירה ברמת גמר</li>
+          <li>רישום שטחי ציבור על שם המועצה <strong>טרם</strong> איכלוס</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>תסריטי מו"מ - מה אם היזם אומר...</summary>
+    <div class="detail-content">
+      <table>
+        <tr><th style="width:35%;">טענת היזם</th><th>תשובה מומלצת</th></tr>
+        <tr>
+          <td>"הרווח כבר נמוך, אי אפשר להוסיף מטלות"</td>
+          <td>"המצגת לבורסה שלכם מציגה 36% רווח גולמי ו-881 מיליון הכנסות. בתקן 21.1 הסף הוא 16%. יש מרחב של עשרות מיליונים."</td>
+        </tr>
+        <tr>
+          <td>"הוועדה כבר אישרה - אין מה לשנות"</td>
+          <td>"יש עתירה תלויה ועומדת. בית המשפט יכול להחזיר לדיון. כל יום עיכוב עולה לכם כסף. עדיף לסגור כאן."</td>
+        </tr>
+        <tr>
+          <td>"לא נוכל לתת 1,100 מ"ר ציבור"</td>
+          <td>"באבן יהודה, עם אותו מספר יח"ד קיימות, שטחי הציבור מספקים. למה בתל מונד אי אפשר? בית המשפט ישאל את אותה שאלה."</td>
+        </tr>
+        <tr>
+          <td>"תקן חניה 1:1.3 מספיק"</td>
+          <td>"תל מונד במקום 182 בתח"צ. אין מתע"ן. אין אוטובוסים ראויים. אפילו הוועדה המרחבית שלכם אמרה ש-1:1.5 מתאים."</td>
+        </tr>
+        <tr>
+          <td>"אם נפחית יח"ד, הפרויקט לא כדאי"</td>
+          <td>"25 דירות פחות? עם רווח של 25.2% אתם יכולים לספוג את זה בקלות ועדיין להרוויח מעל התקן."</td>
+        </tr>
+        <tr>
+          <td>"המועצה מעכבת פרויקט שהדיירים רוצים"</td>
+          <td>"85% מהדיירים תומכים - וגם אנחנו. אנחנו לא מתנגדים להתחדשות, אנחנו מבקשים שתהיה <strong>ראויה</strong>. מועצה אחראית דואגת לתושבים."</td>
+        </tr>
+      </table>
+    </div>
+  </details>
+
+  <details>
+    <summary>חוזקות וחולשות - ניתוח SWOT</summary>
+    <div class="detail-content">
+      <div class="matrix-grid">
+        <div class="matrix-cell" style="background:#c6f6d5;border:1px solid #9ae6b4;">
+          <h5>&#128170; חוזקות</h5>
+          <ul>
+            <li>עתירה מנהלית תלויה - לחץ זמן על היזם</li>
+            <li>חוות דעת מומחים (פרוגרמה, שמאות, תחבורה, ניקוז)</li>
+            <li>רווח יזמי מוכח מופרז (25.2% מול 16%)</li>
+            <li>מצגת בורסה חושפת רווח אמיתי גבוה יותר</li>
+            <li>טענת אבן יהודה - "איפה ואיפה"</li>
+            <li>תמיכת הוועדה המרחבית בתקן 1:1.5</li>
+            <li>המועצה תומכת בפרויקט - לא "מתנגדת"</li>
+          </ul>
+        </div>
+        <div class="matrix-cell" style="background:#fed7d7;border:1px solid #feb2b2;">
+          <h5>&#9888; חולשות</h5>
+          <ul>
+            <li>ועדת הערר כבר דחתה את כל הטענות</li>
+            <li>בית משפט ממעט להתערב בשיקול דעת תכנוני</li>
+            <li>היזם יכול לטעון שהמועצה מעכבת דיירים</li>
+            <li>טענת הגובה נדחתה - פסיקה ברורה בנושא</li>
+            <li>14 יום מו"מ כבר נכשלו</li>
+          </ul>
+        </div>
+        <div class="matrix-cell" style="background:#bee3f8;border:1px solid #90cdf4;">
+          <h5>&#127775; הזדמנויות</h5>
+          <ul>
+            <li>תכנית ראשונה = תקדים ליישוב כולו</li>
+            <li>בית המשפט יכול להחזיר לדיון עם הוראות</li>
+            <li>הסכמות חלקיות מחזקות עמדה</li>
+            <li>עיכוב = עלות ריבית ליזם = מוטיבציה להסכים</li>
+            <li>תיקון מצגת בורסה = ראיה חדשה</li>
+          </ul>
+        </div>
+        <div class="matrix-cell" style="background:#feebc8;border:1px solid #fbd38d;">
+          <h5>&#9889; איומים</h5>
+          <ul>
+            <li>בית משפט דוחה העתירה = אין מנוף</li>
+            <li>דיירים לוחצים על המועצה</li>
+            <li>עיכוב ארוך פוגע ביחסי ציבור</li>
+            <li>היזם פונה ישירות לדיירים ולתקשורת</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- ===== SECTION: RED LINES ===== -->
+<div id="redlines" class="section-anchor"></div>
+<div class="card">
+  <div class="card-header">
+    <div class="icon" style="background:#fed7d7;color:var(--accent);">&#128721;</div>
+    <h2>קווים אדומים - מה לא מוותרים עליו בשום מצב</h2>
+  </div>
+
+  <div class="warning-box">
+    <h4>קו אדום 1: שטחי ציבור מבונים - לפחות 1,000 מ"ר עיקרי</h4>
+    <p>זה המינימום לתת מענה לגנ"י, מעונות ושירותי ציבור בסיסיים. מתחת לזה - אין פשרה. <strong>הגבול המוחלט: 1,000 מ"ר</strong> (לעומת דרישה של 1,100).</p>
+  </div>
+
+  <div class="warning-box">
+    <h4>קו אדום 2: תקן חניה - לפחות 1:1.4</h4>
+    <p>1:1.3 פשוט לא מספיק. <strong>הגבול המוחלט: 1:1.4</strong> (לעומת דרישה של 1:1.5). מתחת לזה - מצוקת חניה בלתי פתירה.</p>
+  </div>
+
+  <div class="warning-box">
+    <h4>קו אדום 3: הסכם תחזוקה ומסירה</h4>
+    <p>מנגנון חוזי מחייב למסירת שטחי ציבור ברמת גמר + ערבות ביצוע. <strong>ללא מנגנון = ללא הסכם.</strong></p>
+  </div>
+
+  <div class="success-box">
+    <h4>&#128161; תזכורת חשובה לצוות המו"מ</h4>
+    <ul style="padding-right:20px;margin-top:8px;">
+      <li><strong>אנחנו לא מתנגדים להתחדשות.</strong> הפרויקט חשוב ואנחנו תומכים בו.</li>
+      <li><strong>אנחנו דואגים לתושבים</strong> - הקיימים והעתידיים.</li>
+      <li><strong>זו תכנית ראשונה מסוגה בתל מונד</strong> - מה שנקבע כאן ייצור תקדים לכל פרויקט עתידי.</li>
+      <li><strong>הכסף קיים.</strong> 25.2% רווח = יש מרחב. לא מבקשים להרוג את הפרויקט.</li>
+      <li><strong>הזמן עובד לטובתנו</strong> - כל עיכוב עולה ליזם ריביות ומימון. אבל גם לא רוצים לעכב מיותר.</li>
+      <li><strong>BATNA שלנו:</strong> בית המשפט. אם המו"מ נכשל, יש לנו עתירה חזקה עם טענות מבוססות.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== SUMMARY CARD ===== -->
+<div class="card" style="background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);color:#fff;border:none;">
+  <h2 style="margin-bottom:16px;">&#127919; סיכום: 3 המסרים המרכזיים למו"מ</h2>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+    <div style="background:rgba(255,255,255,.15);padding:20px;border-radius:10px;">
+      <h3 style="font-size:2rem;margin-bottom:8px;">1</h3>
+      <h4>הכסף קיים</h4>
+      <p style="font-size:.9rem;opacity:.9;">רווח של 25.2% (ואולי 36%) מול תקן 16%. מרחב של עשרות מיליונים לשטחי ציבור, חניה והפחתת צפיפות - בלי לפגוע בכדאיות.</p>
+    </div>
+    <div style="background:rgba(255,255,255,.15);padding:20px;border-radius:10px;">
+      <h3 style="font-size:2rem;margin-bottom:8px;">2</h3>
+      <h4>אפליה מוכחת</h4>
+      <p style="font-size:.9rem;opacity:.9;">אבן יהודה קיבלה יותר שטחי ציבור ותקן חניה גבוה - אותה ועדה, אותו מספר יח"ד. בית המשפט לא יאפשר "איפה ואיפה".</p>
+    </div>
+    <div style="background:rgba(255,255,255,.15);padding:20px;border-radius:10px;">
+      <h3 style="font-size:2rem;margin-bottom:8px;">3</h3>
+      <h4>תקדים לדורות</h4>
+      <p style="font-size:.9rem;opacity:.9;">תכנית ראשונה מסוגה בתל מונד. מה שנקבע כאן ישפיע על כל פרויקט התחדשות עתידי ביישוב. חייבים לעשות את זה נכון.</p>
+    </div>
+  </div>
+</div>
+
+</div><!-- end container -->
+
+<div class="footer">
+  הוכן ע"י יהונתן ספיבק | מבוסס על: החלטת ועדת ערר 22/25, כתב ערר + נספחים, עתירה מנהלית | סודי - לשימוש פנימי בלבד
+</div>
+
+<!-- ===================== LESSON MODAL ===================== -->
+<div class="modal-overlay" id="lessonModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="lesson-icon" id="modalIcon">&#128218;</div>
+      <div>
+        <h3 id="modalTitle">כותרת שיעור</h3>
+        <div class="lesson-sub" id="modalSub">תיאור</div>
+      </div>
+      <button class="modal-close" onclick="closeLesson()" title="סגירה">&times;</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-footer">
+      <button class="audio-btn play" id="btnPlay" onclick="toggleSpeech()">
+        <span id="playIcon">&#9654;</span>
+        <span id="playText">הקראה</span>
+      </button>
+      <button class="audio-btn stop" id="btnStop" onclick="stopSpeech()" style="display:none;">
+        &#9632; עצור
+      </button>
+      <div class="speed-control">
+        <label for="speedSelect">מהירות:</label>
+        <select id="speedSelect" onchange="changeSpeed()">
+          <option value="0.7">איטי</option>
+          <option value="0.9" selected>רגיל</option>
+          <option value="1.1">מהיר</option>
+          <option value="1.3">מהיר מאוד</option>
+        </select>
+      </div>
+      <div class="nav-lesson-btns">
+        <button class="nav-lesson-btn" id="btnPrev" onclick="prevLesson()">&#8594; הקודם</button>
+        <button class="nav-lesson-btn" id="btnNext" onclick="nextLesson()">הבא &#8592;</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== LESSONS DATA =====
+const lessons = [
+  {
+    icon: '&#128218;', color: '#3182ce',
+    title: 'שיעור 1: סיפור הפרויקט',
+    sub: '~4 דקות קריאה | רקע והיסטוריה',
+    body: `
+      <h4>איפה אנחנו ועל מה מדובר?</h4>
+      <p>בדופן הדרומית של תל מונד, ברחוב האיריס 2 עד 10, יש שכונה ותיקה בשם <strong>"שכונת אלי כהן"</strong>. בשכונה עומדים 5 מבני "רכבת" ישנים בני 3 קומות, ובהם 102 דירות קטנות - חלקן בגודל של 53 מ"ר בלבד.</p>
+      <p>השכונה נמצאת על חטיבת קרקע של כ-15 דונם, גובלת בנחל חירות מדרום, רחוב הסביון ממערב, ובנייה נמוכה (צמודי קרקע) מצפון.</p>
+
+      <h4>מה רוצים לעשות?</h4>
+      <p>חברת <strong>אב-גד במושבה בע"מ</strong> (היזם) הגישה תכנית פינוי-בינוי: להרוס את כל 102 הדירות הישנות ולבנות במקומן <strong>370 דירות חדשות</strong> ב-10 מבנים בגובה 8 עד 10 קומות.</p>
+      <p>זה מכפיל של 3.6 - על כל דירה ישנה ייבנו כמעט 4 דירות חדשות. הדירות החדשות גדולות הרבה יותר - ממוצע של 120 מ"ר במקום 71 מ"ר.</p>
+
+      <div class="key-point">&#128161; זו תכנית ההתחדשות העירונית הראשונה מסוגה בתל מונד. מה שייקבע כאן ייצור תקדים לכל פרויקט עתידי ביישוב.</div>
+
+      <h4>למה זה חשוב למועצה?</h4>
+      <p>המועצה <strong>תומכת</strong> בהתחדשות - אין ויכוח על כך. הדירות ישנות, ללא מיגון ראוי, והתושבים זקוקים לשדרוג. אבל המועצה אחראית על כלל התושבים ועל התשתיות - ולכן היא דורשת שהפרויקט ייבנה בצורה שנותנת מענה אמיתי:</p>
+      <ul>
+        <li>מספיק שטחים למבני ציבור - גנים, מעונות, שירותי בריאות ורווחה</li>
+        <li>מספיק חניות - כי אין תחבורה ציבורית ראויה בתל מונד</li>
+        <li>תשתיות תחבורה שיעמדו בעומס</li>
+        <li>פתרונות ניקוז ראויים</li>
+      </ul>
+
+      <h4>מה קיים היום בשטח?</h4>
+      <ul>
+        <li>102 דירות ב-5 מבני רכבת</li>
+        <li>שטח בייעוד "מבני ציבור" (שטח "חום") של כ-1,293 מ"ר - <strong>זה מבוטל בתכנית!</strong></li>
+        <li>מגרש ספורט - <strong>ייהרס</strong></li>
+        <li>גן משחקים ומקלט ציבורי</li>
+        <li>שטח ניקוז של כ-850 מ"ר</li>
+        <li>שטח מסחרי קטן של כ-175 מ"ר</li>
+      </ul>
+
+      <div class="warning-point">&#9888; שימו לב: התכנית מבטלת שטח ציבורי קיים של כ-1,293 מ"ר ובמקומו נותנת רק ~700 מ"ר. המועצה למעשה מפסידה שטח ציבור.</div>
+    `
+  },
+  {
+    icon: '&#128101;', color: '#38a169',
+    title: 'שיעור 2: הצדדים והשחקנים',
+    sub: '~3 דקות קריאה | מי מול מי',
+    body: `
+      <h4>הצד שלנו - המועצה המקומית תל מונד</h4>
+      <p>אנחנו מייצגים את <strong>האינטרס הציבורי</strong> - של התושבים הקיימים, של התושבים העתידיים, ושל הישוב כולו. אנחנו לא מתנגדים לפרויקט - אנחנו רוצים שהוא ייעשה נכון.</p>
+      <p><strong>עורכי דין:</strong> עו"ד ענת בירן (רקם) ושותפים - בעתירה המנהלית. עו"ד עמיחי ויינברגר ואוהד מרציאנו - בערר.</p>
+      <p><strong>מומחים מטעמנו:</strong></p>
+      <ul>
+        <li>ד"ר חוה ארליך - חוות דעת פרוגרמתית (שטחי ציבור)</li>
+        <li>מר צח קוזניצקי - שמאי, חוות דעת כלכלית</li>
+        <li>גב' רותי בן-זנו - יועצת תנועה, חוות דעת תחבורתית</li>
+        <li>חוות דעת ניהול נגר וניקוז</li>
+      </ul>
+
+      <h4>היזם - אב-גד במושבה בע"מ</h4>
+      <p>חברה יזמית (ח.פ. 515069847), נסחרת בבורסה. קידמה את הפרויקט כ-11 שנים. ב"כ: עו"ד ברק קינן ממשרד מ. פירון ושות'.</p>
+      <div class="key-point">&#128161; מצגת הבורסה של היזם מ-09.04.2025 חושפת הכנסות צפויות של 881 מיליון ש"ח ורווח גולמי של כ-36%. זה הרבה יותר ממה שהציגו לוועדות התכנון.</div>
+
+      <h4>הוועדה המחוזית מרכז (משיבה 1)</h4>
+      <p>הגוף שאישר את התכנית ב-5.5.2025. ב"כ: עו"ד ניצן בן ארויה. הוועדה הוסיפה 400 מ"ר שטחי ציבור אבל דחתה את רוב טענות המועצה.</p>
+
+      <h4>הוועדה המרחבית שרונים (משיבה 3)</h4>
+      <p>הוועדה המקומית. <strong>חשוב:</strong> מהנדסת הוועדה ציינה בדיון שתקן חניה של 1:1.5 <strong>יתאים לתכנית</strong> - זה תומך בעמדתנו!</p>
+
+      <h4>הרשות הממשלתית להתחדשות עירונית (משיבה 4)</h4>
+      <p>הצטרפה כמגישת התכנית (כי המועצה סירבה). ציינה בדיון "אין להם עמדה מובהקת ברוב הסוגיות" ושצריך "לעשות מאמץ לאור הזמן הארוך".</p>
+
+      <h4>ועדת המשנה לעררים (מועצה ארצית)</h4>
+      <p>דחתה את הערר ב-9.11.2025. יו"ר: עו"ד יוני קרואני. <strong>בעתירה טוענים שלא בחנה את התכנית DE NOVO</strong> אלא סמכה על הוועדה המחוזית.</p>
+
+      <h4>הדיירים</h4>
+      <p>כ-85% מדיירי השכונה תומכים בפרויקט. הם רוצים שהפרויקט יתקדם - אבל גם רוצים שהקבלן יעמוד בהתחייבויותיו.</p>
+    `
+  },
+  {
+    icon: '&#128203;', color: '#e53e3e',
+    title: 'שיעור 3: מה ביקשנו ומה קיבלנו',
+    sub: '~5 דקות קריאה | הפערים המרכזיים',
+    body: `
+      <h4>הסוגיה העיקרית: שטחי ציבור</h4>
+      <p>זו הסוגיה הקריטית ביותר. בואו נבין את המספרים:</p>
+
+      <h4>מה אנחנו צריכים?</h4>
+      <p>הפרוגרמה של ד"ר חוה ארליך (מומחית מטעמנו) קובעת שלשכונה עם 370 דירות נדרשים:</p>
+      <ul>
+        <li><strong>3 כיתות גן ילדים</strong> - בערך 300 מ"ר</li>
+        <li><strong>3 כיתות מעונות יום</strong> - בערך 300 מ"ר</li>
+        <li><strong>שימושי ציבור נוספים</strong> (בריאות, רווחה, דת, קהילה) - בערך 200 מ"ר</li>
+        <li>קירוי חצרות גנ"י - בערך 300 מ"ר נוספים</li>
+      </ul>
+      <p><strong>סה"כ נדרש: 1,100 מ"ר שטח עיקרי</strong> (פלוס קירוי ושירות)</p>
+
+      <h4>מה אישרו?</h4>
+      <p>רק כ-700 מ"ר: 300 מ"ר שהיו בתכנית המקורית + 400 מ"ר שהוועדה המחוזית הוסיפה. <strong>חסרים לפחות 400 מ"ר.</strong></p>
+
+      <div class="warning-point">&#9888; <strong>הטעות המרכזית:</strong> הוועדה חישבה פרוגרמה רק ל-268 דירות תוספתיות (370 פחות 102 קיימות), בהנחה ש"קיים מענה" לדיירים הנוכחיים. זו טעות! האוכלוסיה תשתנה לגמרי - משפחות צעירות גדולות במקום זוגות מבוגרים בדירות קטנות. חייבים לחשב לכל 370 הדירות.</div>
+
+      <h4>למה ה-400 מ"ר שהוסיפו לא באמת מספיקים?</h4>
+      <p>ה-400 מ"ר שהוועדה הוסיפה הם <strong>שטח כולל</strong> (לא עיקרי), שנכפו מתוך אילוץ של גודל קומה - לא מתוך חישוב פרוגרמטי אמיתי. הוועדה "דחקה" 400 מ"ר חלף קומת מגורים, ואת שטחי המגורים שנגרעו הגבילה במבנה אחר על ידי הוספת קומה 9.</p>
+
+      <h4>הסוגיה השנייה: חניה</h4>
+      <p>אישרו תקן של <strong>1.3 חניה לכל דירה</strong>. אנחנו דורשים <strong>1.5</strong>. הפער: 74 מקומות חניה.</p>
+      <p>למה זה קריטי? <strong>כי אין תחבורה ציבורית בתל מונד.</strong> הישוב מדורג במקום 182 במדדי תח"צ. כמעט כל תושב תלוי ברכב פרטי.</p>
+      <div class="key-point">&#128161; גם הוועדה המרחבית שרונים (שמכירה את השטח!) אמרה שתקן 1:1.5 מתאים. הוועדה המחוזית התעלמה מזה.</div>
+
+      <h4>הסוגיה השלישית: מוסדות חינוך</h4>
+      <p>התכנית תיצור צורך ב-4 כיתות יסוד ו-4 כיתות על-יסודיות. קריית החינוך של תל מונד כבר מלאה לגמרי - השטח "הפנוי" כבר מיועד ל-2,000 דירות אחרות שבבנייה. התכנית לא נותנת לזה שום מענה - פשוט שלחו את המועצה לפתור לבד.</p>
+
+      <h4>הסוגיה הרביעית: ניקוז</h4>
+      <p>מתקני ניקוז פרטיים (של היזם) ממוקמים בשטח ציבורי פתוח - שצ"פ. זה לא הגיוני. מתקנים פרטיים צריכים להיות בשטח פרטי, על חשבון היזם, כולל הסכם תחזוקה.</p>
+
+      <h4>סיכום הפערים</h4>
+      <ul>
+        <li>שטחי ציבור: חסרים <strong>~400 מ"ר</strong></li>
+        <li>חניות: חסרות <strong>~74 מקומות</strong></li>
+        <li>חינוך: <strong>אין מענה כלל</strong></li>
+        <li>ניקוז: <strong>מתקנים פרטיים על קרקע ציבורית</strong></li>
+      </ul>
+    `
+  },
+  {
+    icon: '&#128176;', color: '#dd6b20',
+    title: 'שיעור 4: הרווח של היזם - הקלף המרכזי',
+    sub: '~4 דקות קריאה | כלכלה ומספרים',
+    body: `
+      <h4>למה הרווח כל כך חשוב?</h4>
+      <p>הרווח של היזם הוא <strong>הטיעון החזק ביותר</strong> שיש לנו. אם הרווח היה 16% (כמקובל) - לא היה לנו טענה. אבל הרווח הוא <strong>25.2%</strong> ואולי אף יותר. ההפרש הזה הוא הכסף שממנו אפשר לממן את כל מה שאנחנו מבקשים.</p>
+
+      <h4>מה אומר תקן 21.1?</h4>
+      <p>זה התקן הרשמי לבדיקת כדאיות כלכלית בפינוי-בינוי. הוא קובע רווח יזמי <strong>מינימלי</strong> של 16% באזור השרון כ"סף מקובל". הוועדות מחוזיות נצמדות למספר הזה.</p>
+      <div class="key-point">&#128161; ועדת הערר עצמה אישרה: רווח גבוה מ-16% מותר - "כל עוד הדבר מיטיב עם התכנית". השאלה: האם רווח של 25.2% מיטיב עם התכנית כשחסרים שטחי ציבור וחניות?</div>
+
+      <h4>שלושה מספרים שצריך לזכור</h4>
+      <ol>
+        <li><strong>25.2%</strong> - הרווח לפי הדו"ח הכלכלי שהיזם הציג לוועדה</li>
+        <li><strong>~36%</strong> - הרווח הגולמי לפי מצגת הבורסה של היזם למשקיעים</li>
+        <li><strong>881 מיליון ש"ח</strong> - סך ההכנסות הצפויות (מצגת בורסה מ-09.04.2025)</li>
+      </ol>
+
+      <h4>למה הרווח בפועל גבוה עוד יותר מ-25.2%?</h4>
+      <p><strong>בעיה 1: הורדת מחירים מלאכותית.</strong> שמאית היזם עצמה כתבה שסקר המחירים מראה ממוצע של 29,000 ש"ח למ"ר. אבל בתחשיב היא הכניסה 28,625 ש"ח - הפחתה מכוונת. לפי הניתוח שלנו, המחיר האמיתי לפחות 30,000 ש"ח למ"ר.</p>
+      <p><strong>בעיה 2: פער בין מה שאמרו לוועדה לבין מה שאמרו למשקיעים.</strong> בדו"ח לוועדה: הכנסות של 796 מיליון. במצגת למשקיעים: 881 מיליון. פער של 85 מיליון ש"ח!</p>
+      <p><strong>בעיה 3: שמאי המחוז אימץ ללא ביקורת.</strong> פשוט קיבל את המספרים של היזם.</p>
+
+      <div class="warning-point">&#9888; <strong>במילים פשוטות:</strong> היזם אמר לוועדה "אנחנו מרוויחים 25.2%" ואמר למשקיעים "אנחנו מרוויחים 36%". מישהו לא מקבל את האמת.</div>
+
+      <h4>מה אפשר "לקנות" בכסף הזה?</h4>
+      <p>ההפרש בין 25.2% ל-16% = כ-9% מעלויות הפרויקט. זה עשרות מיליוני ש"ח. מספיק בשופי ל:</p>
+      <ul>
+        <li>הוספת 400 מ"ר שטחי ציבור (~2-3% מהרווח)</li>
+        <li>הפחתת 25 דירות (~3-4% מהרווח)</li>
+        <li>הוספת 74 חניות (~1-2% מהרווח)</li>
+        <li>העברת ניקוז לשטח פרטי (~0.5% מהרווח)</li>
+      </ul>
+      <p><strong>סה"כ: 7-9% מהרווח. היזם עדיין נשאר עם 16-18% - בדיוק כמו שהתקן דורש!</strong></p>
+
+      <div class="key-point">&#128161; <strong>המסר המרכזי:</strong> "אנחנו לא מבקשים מהיזם להפסיד. אנחנו מבקשים שירוויח כמו שכולם מרוויחים - 16% - ושההפרש ילך לטובת התושבים."</div>
+    `
+  },
+  {
+    icon: '&#128663;', color: '#805ad5',
+    title: 'שיעור 5: החניה והתחבורה',
+    sub: '~3 דקות קריאה | למה 1:1.3 לא מספיק',
+    body: `
+      <h4>הבעיה בשתי מילים: אין אוטובוסים</h4>
+      <p>תל מונד מדורגת במקום <strong>182</strong> מתוך כל היישובים בישראל במדדי תחבורה ציבורית. אין רכבת, אין רכבת קלה, והאוטובוסים כמעט לא עוברים. כמעט כל תושב תלוי ברכב פרטי.</p>
+
+      <h4>מה זה אומר במספרים?</h4>
+      <ul>
+        <li>תקן מינימלי (חוק): <strong>1:1</strong> - חניה אחת לדירה (370 חניות)</li>
+        <li>מה אישרו: <strong>1:1.3</strong> - 481 חניות</li>
+        <li>מה אנחנו דורשים: <strong>1:1.5</strong> - 555 חניות</li>
+        <li>הפער: <strong>74 מקומות חניה</strong></li>
+      </ul>
+
+      <div class="key-point">&#128161; 74 חניות חסרות = 74 מכוניות שיחנו ברחובות הצרים של תל מונד, כל יום, כל לילה. זה סיוט תחבורתי שלא ייגמר.</div>
+
+      <h4>למה הוועדה אישרה 1:1.3?</h4>
+      <p>הוועדה אמרה שהתקנות מאפשרות 1:1, ו-1.3 זה כבר "מעל המינימום". נכון - אבל המינימום מניח שיש תחבורה ציבורית. בתל מונד אין. הוועדה עצמה הודתה שלא הסתמכה על תח"צ בקביעת התקן - ובכל זאת לא העלתה אותו.</p>
+
+      <h4>רחוב הסביון - צוואר בקבוק</h4>
+      <p>רחוב הסביון הוא הכניסה והיציאה המרכזית. הוא מאושר ברוחב 16 מ' אבל בפועל רק 8 מ'. תוספת של 270 דירות תזרום דרך הרחוב הזה.</p>
+      <p>הוועדה טענה ש"מדובר ב-3 רכבים בדקה - לא משמעותי". אבל <strong>לא נערכה בדיקת השפעות תחבורתיות</strong> מקיפה! ולגבי הכיכרות המרכזיות - אין אפשרות מעשית להרחיב אותן.</p>
+
+      <h4>העובדה החזקה ביותר</h4>
+      <p>מהנדסת הוועדה המרחבית שרונים - הוועדה שמכירה את השטח הכי טוב - <strong>אמרה בדיון שתקן 1:1.5 מתאים לתכנית!</strong> הוועדה המחוזית פשוט התעלמה.</p>
+
+      <h4>מה אנחנו דורשים?</h4>
+      <ol>
+        <li>תקן חניה של <strong>1:1.5</strong> (לא פחות מ-1:1.4)</li>
+        <li>חניות אורחים</li>
+        <li><strong>בדיקת השפעות תחבורתיות</strong> מקיפה על חשבון היזם</li>
+        <li>הרחבת רחוב הסביון למלוא הרוחב הסטטוטורי כחלק מהפרויקט</li>
+      </ol>
+    `
+  },
+  {
+    icon: '&#9878;', color: '#c53030',
+    title: 'שיעור 6: ההליכים המשפטיים',
+    sub: '~4 דקות קריאה | מה היה ולאן הולכים',
+    body: `
+      <h4>התחנות שעברנו</h4>
+
+      <p><strong>מרץ 2024 - הפקדה:</strong> הוועדה המחוזית דנה בתכנית והחליטה להפקיד בתנאים.</p>
+
+      <p><strong>דצמבר 2024 - התנגדויות:</strong> הוגשו 5 התנגדויות, כולל של המועצה. ההתנגדות שלנו נתמכה ב-4 חוות דעת מומחים (פרוגרמה, כלכלה, תחבורה, ניקוז).</p>
+
+      <p><strong>אפריל 2025 - דיון בהתנגדויות:</strong> הוועדה המחוזית דנה, קיבלה חלקית - הוסיפה 400 מ"ר שטחי ציבור אבל גם הוסיפה קומה 9 למבנה. דחתה את רוב הטענות.</p>
+
+      <p><strong>5.5.2025 - אישור:</strong> הוועדה המחוזית מאשרת את התכנית. רוב טענותינו נדחו "ללא נימוק ראוי המניח את הדעת או ללא התייחסות כלל."</p>
+
+      <p><strong>ערר למועצה הארצית:</strong> הגשנו ערר מפורט. ב-7.8.2025 התקיים דיון, הצדדים נשלחו לגבש הסכמות ב-14 יום.</p>
+
+      <div class="warning-point">&#9888; <strong>21.8.2025:</strong> הצדדים מודיעים - לא הושגה הסכמה. המו"מ הקודם נכשל.</div>
+
+      <p><strong>9.11.2025 - דחיית הערר:</strong> ועדת המשנה לעררים דוחה את הערר במלואו. ההחלטה לקונית - לא בחנה את התכנית באופן עצמאי.</p>
+
+      <h4>העתירה המנהלית</h4>
+      <p>הוגשה לבית המשפט המחוזי מרכז-לוד. טענות מרכזיות:</p>
+      <ol>
+        <li><strong>ועדת הערר לא בחנה DE NOVO</strong> - סמכה על הוועדה המחוזית במקום לבחון עצמאית</li>
+        <li><strong>הנחות שגויות</strong> - חישוב פרוגרמה רק לתוספת, התעלמות מהעדר תח"צ</li>
+        <li><strong>איזון לקוי</strong> - רווח 25%+ ליזם, חסר בשטחי ציבור וחניות</li>
+        <li><strong>אפליה</strong> - באבן יהודה הסמוכה אושרה תכנית דומה עם תנאים טובים בהרבה</li>
+      </ol>
+
+      <h4>הסעדים שביקשנו</h4>
+      <ul>
+        <li>ביטול אישור התכנית והחזרה לדיון בהתנגדויות</li>
+        <li>1,100 מ"ר שטחי ציבור</li>
+        <li>תקן חניה 1:1.5</li>
+        <li>הפחתה ל-345 יח"ד (רווח 16%)</li>
+        <li>לחלופין - החזרת הדיון עם הוראות מתאימות</li>
+      </ul>
+
+      <h4>טענת אבן יהודה - הנשק הסודי</h4>
+      <div class="key-point">&#128161; באבן יהודה (ישוב סמוך, אותה ועדה מרחבית!) אושרה בהפקדה תכנית דומה מאוד - 102 יח"ד קיימות, אבל עם שטחי ציבור מספקים ותקן חניה גבוה יותר. זו ראיה חותכת ל"איפה ואיפה" - בית המשפט מאוד רגיש לזה.</div>
+
+      <h4>מה קורה עכשיו?</h4>
+      <p>העתירה תלויה ועומדת. <strong>זה המנוף שלנו במו"מ.</strong> כל יום שהעתירה חיה = עיכוב ליזם = ריביות ומימון = מוטיבציה להגיע להסכמות. אבל גם לנו יש אינטרס לסגור - כי הפרויקט חשוב לתושבים.</p>
+    `
+  },
+  {
+    icon: '&#127919;', color: '#2d3748',
+    title: 'שיעור 7: הכנה אחרונה למו"מ',
+    sub: '~5 דקות קריאה | טקטיקה ומסרים',
+    body: `
+      <h4>3 כללי ברזל למו"מ</h4>
+      <ol>
+        <li><strong>אנחנו בעד ההתחדשות.</strong> תמיד פתחו ותסיימו עם המסר הזה. אנחנו לא מתנגדים - אנחנו מבקשים שייעשה נכון.</li>
+        <li><strong>המספרים מדברים.</strong> אל תרגישו שאתם "שודדים" מהיזם. 25% מול 16% = 9% עודף. זה עשרות מיליונים. יש מספיק לכולם.</li>
+        <li><strong>יש לנו BATNA.</strong> אם המו"מ נכשל - יש עתירה בבית המשפט עם טענות חזקות. היזם יודע את זה.</li>
+      </ol>
+
+      <h4>סדר העדיפויות - מה חובה ומה אפשר לוותר</h4>
+      <p style="font-weight:700;color:#c53030;">חובה (אל תוותרו!):</p>
+      <ul>
+        <li>1,100 מ"ר שטחי ציבור (גבול מוחלט: 1,000 מ"ר)</li>
+        <li>תקן חניה 1:1.5 (גבול מוחלט: 1:1.4)</li>
+        <li>מנגנון מסירה + ערבות ביצוע</li>
+      </ul>
+
+      <p style="font-weight:700;color:#dd6b20;">רצוי מאוד:</p>
+      <ul>
+        <li>הפחתה ל-345 יח"ד</li>
+        <li>ניקוז בשטח פרטי + הסכם תחזוקה</li>
+        <li>הרחבת רחוב הסביון + בה"ת</li>
+      </ul>
+
+      <p style="font-weight:700;color:#38a169;">אפשר לוותר (ויתורים טקטיים):</p>
+      <ul>
+        <li>הגבלת גובה ל-7 קומות - נקבל 8-10 בתמורה לשטחי ציבור</li>
+        <li>9 קומות במבנה אחורי - בתמורה לקומת ציבור</li>
+        <li>פריסת שצ"פ - אם מקבלים יותר שטח כולל</li>
+      </ul>
+
+      <h4>טקטיקת המו"מ</h4>
+
+      <div class="key-point">
+        <strong>שלב 1 - פתיחה:</strong> הציגו את כל הדרישות, גם אלה שמוכנים לוותר. הדגישו: "אנחנו תומכים, אבל לא על חשבון התושבים". הציגו את הפער: 25.2% מול 16%.
+      </div>
+
+      <div class="key-point">
+        <strong>שלב 2 - לחץ:</strong> "העתירה תלויה. אנחנו מעדיפים הסכמות. אבל אם צריך, בית המשפט יחליט." אזכרו את אבן יהודה. אזכרו את מצגת הבורסה.
+      </div>
+
+      <div class="key-point">
+        <strong>שלב 3 - גמישות:</strong> תנו לצד השני "לנצח" בדברים שפחות חשובים לכם. ויתור על גובה = מרגיש גדול, עולה לנו מעט. דרשו בתמורה את מה שבאמת חשוב.
+      </div>
+
+      <div class="key-point">
+        <strong>שלב 4 - סגירה:</strong> כל הסכמה מעוגנת בהוראות התכנית, לא רק בהסכם. לוח זמנים מחייב. ערבות ביצוע. רישום על שם המועצה לפני איכלוס.
+      </div>
+
+      <h4>תשובות מוכנות</h4>
+      <p>אם היזם אומר <strong>"הרווח שלנו לא כזה גבוה"</strong>:</p>
+      <p style="margin-right:20px;">"המצגת שלכם למשקיעים בבורסה מ-אפריל 2025 מציגה 881 מיליון הכנסות ו-36% רווח גולמי. המספרים שם."</p>
+
+      <p>אם אומר <strong>"הוועדה כבר אישרה"</strong>:</p>
+      <p style="margin-right:20px;">"ויש עתירה בבית המשפט. כל יום עיכוב עולה לכם ריביות. בואו נסגור כאן ונחסוך לכולם זמן וכסף."</p>
+
+      <p>אם אומר <strong>"אתם מעכבים את הדיירים"</strong>:</p>
+      <p style="margin-right:20px;">"אנחנו דואגים לדיירים - הקיימים והעתידיים. דירה חדשה בלי גן ילדים, בלי חניה, עם רחובות חנוקים - זה לא התחדשות, זה החלפת בעיה אחת באחרת."</p>
+
+      <div class="warning-point">
+        <strong>&#128680; זכרו:</strong> זו תכנית ראשונה בתל מונד. מה שנקבע כאן הוא התקדים. אם נוותר עכשיו - כל יזם בעתיד יגיד "בשכונת אלי כהן קיבלתם פחות". חייבים להילחם על התקן הנכון - למען כל תושבי תל מונד, לדורות.
+      </div>
+    `
+  }
+];
+
+// ===== STATE =====
+let currentLesson = 0;
+let completedLessons = new Set();
+let isSpeaking = false;
+let isPaused = false;
+let speechRate = 0.9;
+
+// ===== MODAL FUNCTIONS =====
+function openLesson(idx) {
+  currentLesson = idx;
+  const lesson = lessons[idx];
+  const modal = document.getElementById('lessonModal');
+  document.getElementById('modalIcon').innerHTML = lesson.icon;
+  document.getElementById('modalIcon').style.background = lesson.color;
+  document.getElementById('modalTitle').textContent = lesson.title;
+  document.getElementById('modalSub').textContent = lesson.sub;
+  document.getElementById('modalBody').innerHTML = lesson.body;
+
+  document.getElementById('btnPrev').disabled = (idx === 0);
+  document.getElementById('btnNext').disabled = (idx === lessons.length - 1);
+
+  stopSpeech();
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  // Scroll to top of lesson
+  setTimeout(() => { document.getElementById('modalBody').scrollTop = 0; }, 50);
+
+  // Mark completed
+  completedLessons.add(idx);
+  updateProgress();
+}
+
+function closeLesson() {
+  stopSpeech();
+  document.getElementById('lessonModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function nextLesson() {
+  if (currentLesson < lessons.length - 1) openLesson(currentLesson + 1);
+}
+function prevLesson() {
+  if (currentLesson > 0) openLesson(currentLesson - 1);
+}
+
+// Close on overlay click
+document.getElementById('lessonModal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeLesson();
+});
+
+// Close on Escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLesson();
+  if (e.key === 'ArrowLeft' && document.getElementById('lessonModal').classList.contains('open')) nextLesson();
+  if (e.key === 'ArrowRight' && document.getElementById('lessonModal').classList.contains('open')) prevLesson();
+});
+
+// ===== PROGRESS =====
+function updateProgress() {
+  const btns = document.querySelectorAll('.lesson-btn');
+  btns.forEach((btn, i) => {
+    btn.classList.toggle('completed', completedLessons.has(i));
+  });
+  document.getElementById('lessonsProgress').textContent =
+    completedLessons.size + '/' + lessons.length + ' הושלמו';
+}
+
+// ===== TEXT-TO-SPEECH =====
+function getPlainText() {
+  const body = document.getElementById('modalBody');
+  // Get text content, clean up
+  let text = body.innerText || body.textContent;
+  // Remove excessive whitespace
+  text = text.replace(/\n{3,}/g, '\n\n').trim();
+  return text;
+}
+
+function splitToChunks(text, maxLen) {
+  // Split by sentences for natural pauses, respecting maxLen
+  const sentences = text.match(/[^.!?\n]+[.!?\n]+|[^.!?\n]+$/g) || [text];
+  const chunks = [];
+  let current = '';
+  for (const s of sentences) {
+    if ((current + s).length > maxLen && current.length > 0) {
+      chunks.push(current.trim());
+      current = s;
+    } else {
+      current += s;
+    }
+  }
+  if (current.trim()) chunks.push(current.trim());
+  return chunks;
+}
+
+let speechChunks = [];
+let currentChunkIndex = 0;
+
+function toggleSpeech() {
+  if (!('speechSynthesis' in window)) {
+    alert('הדפדפן שלך לא תומך בהקראה. נסה Chrome או Edge.');
+    return;
+  }
+
+  if (isSpeaking && !isPaused) {
+    // Pause
+    window.speechSynthesis.pause();
+    isPaused = true;
+    document.getElementById('playIcon').innerHTML = '&#9654;';
+    document.getElementById('playText').textContent = 'המשך';
+    document.getElementById('btnPlay').classList.remove('speaking');
+    return;
+  }
+
+  if (isPaused) {
+    // Resume
+    window.speechSynthesis.resume();
+    isPaused = false;
+    document.getElementById('playIcon').innerHTML = '&#10074;&#10074;';
+    document.getElementById('playText').textContent = 'השהה';
+    document.getElementById('btnPlay').classList.add('speaking');
+    return;
+  }
+
+  // Start fresh
+  const text = getPlainText();
+  speechChunks = splitToChunks(text, 180);
+  currentChunkIndex = 0;
+  isSpeaking = true;
+  isPaused = false;
+
+  document.getElementById('playIcon').innerHTML = '&#10074;&#10074;';
+  document.getElementById('playText').textContent = 'השהה';
+  document.getElementById('btnPlay').classList.add('speaking');
+  document.getElementById('btnStop').style.display = '';
+
+  speakChunk();
+}
+
+function speakChunk() {
+  if (currentChunkIndex >= speechChunks.length) {
+    resetSpeechUI();
+    return;
+  }
+
+  const utter = new SpeechSynthesisUtterance(speechChunks[currentChunkIndex]);
+  utter.lang = 'he-IL';
+  utter.rate = speechRate;
+  utter.pitch = 1;
+
+  // Try to find a Hebrew voice
+  const voices = window.speechSynthesis.getVoices();
+  const heVoice = voices.find(v => v.lang.startsWith('he'));
+  if (heVoice) utter.voice = heVoice;
+
+  utter.onend = () => {
+    currentChunkIndex++;
+    if (isSpeaking && !isPaused) {
+      speakChunk();
+    }
+  };
+
+  utter.onerror = () => {
+    currentChunkIndex++;
+    if (isSpeaking) speakChunk();
+  };
+
+  window.speechSynthesis.speak(utter);
+}
+
+function stopSpeech() {
+  window.speechSynthesis.cancel();
+  isSpeaking = false;
+  isPaused = false;
+  speechChunks = [];
+  currentChunkIndex = 0;
+  resetSpeechUI();
+}
+
+function resetSpeechUI() {
+  isSpeaking = false;
+  isPaused = false;
+  document.getElementById('playIcon').innerHTML = '&#9654;';
+  document.getElementById('playText').textContent = 'הקראה';
+  document.getElementById('btnPlay').classList.remove('speaking');
+  document.getElementById('btnStop').style.display = 'none';
+}
+
+function changeSpeed() {
+  speechRate = parseFloat(document.getElementById('speedSelect').value);
+  if (isSpeaking) {
+    // Restart from current chunk with new speed
+    window.speechSynthesis.cancel();
+    isPaused = false;
+    speakChunk();
+    document.getElementById('playIcon').innerHTML = '&#10074;&#10074;';
+    document.getElementById('playText').textContent = 'השהה';
+    document.getElementById('btnPlay').classList.add('speaking');
+  }
+}
+
+// Load voices
+if ('speechSynthesis' in window) {
+  window.speechSynthesis.onvoiceschanged = () => {};
+  window.speechSynthesis.getVoices();
+}
+
+// ===== NAV SCROLL =====
+document.querySelectorAll('.nav a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const id = a.getAttribute('href').substring(1);
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    document.querySelectorAll('.nav a').forEach(x => x.classList.remove('active'));
+    a.classList.add('active');
+  });
+});
+
+const sections = document.querySelectorAll('.section-anchor');
+const navLinks = document.querySelectorAll('.nav a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 200) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+
+</body>
+</html>
