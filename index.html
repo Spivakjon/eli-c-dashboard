@@ -57,10 +57,13 @@
     display: flex;
     gap: 0;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
     position: sticky;
     top: 0;
     z-index: 100;
   }
+  .nav::-webkit-scrollbar { display: none; }
   .nav a {
     padding: 14px 20px;
     text-decoration: none;
@@ -316,6 +319,8 @@
   .matrix-nice { background: #bee3f8; border: 1px solid #90cdf4; }
   .matrix-give { background: #c6f6d5; border: 1px solid #9ae6b4; }
 
+  .profit-kpi { grid-template-columns: repeat(4, 1fr); }
+
   /* PRINT */
   @media print {
     .header { position: static; }
@@ -325,11 +330,35 @@
 
   /* RESPONSIVE */
   @media (max-width: 768px) {
-    .container { padding: 16px; }
-    .header { padding: 20px 16px; }
-    .nav { padding: 0 16px; }
+    .container { padding: 14px; }
+    .header { padding: 18px 14px; }
+    .header h1 { font-size: 1.2rem; }
+    .header .subtitle { font-size: .78rem; }
+    .header-meta { gap: 8px; font-size: .72rem; flex-wrap: wrap; margin-top: 8px; }
+    .header-meta span { padding: 2px 8px; }
+    .nav { padding: 0 8px; }
+    .nav a { padding: 11px 13px; font-size: .8rem; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .kpi { padding: 14px 10px; }
+    .kpi .value { font-size: 1.4rem; }
+    .kpi .label { font-size: .72rem; }
+    .kpi .sub { font-size: .68rem; }
+    .card { padding: 18px 14px; margin-bottom: 16px; }
+    .card-header h2 { font-size: 1.05rem; }
+    .card-header .icon { width: 36px; height: 36px; font-size: 1.1rem; }
+    table { font-size: .78rem; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    th, td { padding: 8px 10px; }
+    .compare-bar .bar-label { width: 80px; font-size: .75rem; }
+    .compare-bar .bar-value { width: 55px; font-size: .78rem; }
     .matrix-grid { grid-template-columns: 1fr; }
-    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .demand { padding: 14px 16px; }
+    .demand .demand-meta { flex-direction: column; gap: 4px; }
+    .strategy-box, .warning-box, .success-box { padding: 16px; }
+    details summary { padding: 10px 14px; font-size: .88rem; }
+    .timeline-item { padding-right: 24px; }
+    .footer { padding: 20px 14px; font-size: .72rem; }
+    .summary-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+    .profit-kpi { grid-template-columns: repeat(2, 1fr); }
   }
 
   /* ACCORDION */
@@ -578,9 +607,29 @@
   }
 
   @media (max-width: 768px) {
-    .lessons-bar { padding: 12px 16px; }
-    .modal { max-height: 92vh; }
-    .modal-header, .modal-body, .modal-footer { padding-right: 18px; padding-left: 18px; }
+    .lessons-bar {
+      padding: 10px 12px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 8px;
+    }
+    .lessons-bar::-webkit-scrollbar { display: none; }
+    .lessons-bar .lessons-title { font-size: .82rem; margin-left: 4px; flex-shrink: 0; }
+    .lesson-btn { padding: 7px 12px; font-size: .78rem; flex-shrink: 0; }
+    .lesson-btn .lesson-num { width: 19px; height: 19px; font-size: .68rem; }
+    .lessons-progress { font-size: .7rem; flex-shrink: 0; }
+    .modal { max-height: 95vh; border-radius: 12px; margin: 8px; }
+    .modal-header { padding: 18px 16px 14px; }
+    .modal-header h3 { font-size: 1.05rem; }
+    .modal-header .lesson-icon { width: 42px; height: 42px; font-size: 1.2rem; }
+    .modal-body { padding: 18px 16px; font-size: .9rem; line-height: 1.8; }
+    .modal-footer { padding: 12px 16px; gap: 8px; flex-wrap: wrap; }
+    .audio-btn { padding: 9px 16px; font-size: .82rem; }
+    .speed-control { font-size: .75rem; margin-right: 0; width: 100%; justify-content: center; margin-top: 4px; }
+    .nav-lesson-btns { width: 100%; justify-content: center; }
+    .nav-lesson-btn { padding: 8px 14px; font-size: .82rem; flex: 1; text-align: center; }
   }
 </style>
 </head>
@@ -952,7 +1001,7 @@ if (sessionStorage.getItem('dash_auth') === '1') {
     <span class="badge tag-red">עודף: +9.2% מהמקובל</span>
   </div>
 
-  <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);">
+  <div class="kpi-grid profit-kpi">
     <div class="kpi red">
       <div class="label">רווח לפי דו"ח כלכלי</div>
       <div class="value">25.2%</div>
@@ -1561,7 +1610,7 @@ if (sessionStorage.getItem('dash_auth') === '1') {
 <!-- ===== SUMMARY CARD ===== -->
 <div class="card" style="background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);color:#fff;border:none;">
   <h2 style="margin-bottom:16px;">&#127919; סיכום: 3 המסרים המרכזיים למו"מ</h2>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+  <div class="summary-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
     <div style="background:rgba(255,255,255,.15);padding:20px;border-radius:10px;">
       <h3 style="font-size:2rem;margin-bottom:8px;">1</h3>
       <h4>הכסף קיים</h4>
