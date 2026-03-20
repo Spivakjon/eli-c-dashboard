@@ -381,6 +381,7 @@
     details summary { padding: 10px 14px; font-size: .88rem; }
     .timeline-item { padding-right: 24px; }
     .footer { padding: 20px 14px; font-size: .72rem; }
+    .ai-disclaimer { font-size: .6rem !important; padding: 5px 10px !important; line-height: 1.3; }
     .summary-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
     .profit-kpi { grid-template-columns: repeat(2, 1fr); }
   }
@@ -718,7 +719,7 @@ if (sessionStorage.getItem('dash_auth') === '1') {
 </script>
 
 <!-- ===================== AI DISCLAIMER ===================== -->
-<div style="background:#fefcbf;color:#744210;text-align:center;padding:10px 20px;font-size:.85rem;font-weight:600;border-bottom:2px solid #ecc94b;">
+<div class="ai-disclaimer" style="background:#fefcbf;color:#744210;text-align:center;padding:10px 20px;font-size:.85rem;font-weight:600;border-bottom:2px solid #ecc94b;">
   &#9888; מסמך זה הופק באמצעות ניתוח בינה מלאכותית (AI) של מסמכי התיק. המידע מבוסס על ניתוח אוטומטי ויש לאמתו מול המסמכים המקוריים.
 </div>
 
@@ -2363,5 +2364,7 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 </script>
 
+<script data-goatcounter="https://spivak.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
